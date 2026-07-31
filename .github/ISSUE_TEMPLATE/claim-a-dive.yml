@@ -1,0 +1,42 @@
+name: Claim a dive
+description: Plant your flag on a mission and join the crew on the Hidden Tide roster.
+title: "Claim: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Welcome aboard. Fill this in and a maintainer will add you to the crew on the roster.
+        One rule of the sea: if you find something, it only counts once it replicates on data you did not use to find it.
+  - type: input
+    id: handle
+    attributes:
+      label: Your GitHub handle
+      placeholder: "@yourhandle"
+    validations:
+      required: true
+  - type: input
+    id: mission
+    attributes:
+      label: Which mission are you diving on?
+      description: The idea number and name (e.g. "11 - The Shrimp Are Doing Your Oceanography"), or a Category Zero engine (Z1 to Z8).
+      placeholder: "11 - The Shrimp Are Doing Your Oceanography"
+    validations:
+      required: true
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options:
+        - scouting (just starting)
+        - building (working on it)
+        - surfacing (early results)
+    validations:
+      required: true
+  - type: textarea
+    id: blurb
+    attributes:
+      label: One honest line
+      description: What are you actually up to? Nulls welcome.
+      placeholder: "wiring up NOAA hydrophone pulls; the shrimp remain smug"
+    validations:
+      required: false

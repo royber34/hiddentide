@@ -1,0 +1,27 @@
+name: Validate roster.json
+on:
+  pull_request:
+    paths: ["roster.json"]
+  push:
+    branches: [main]
+    paths: ["roster.json"]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: roster.json must be valid and complete
+        run: |
+          python3 - <<'PY'
+          import json
+          data = json.load(open('roster.json'))
+          assert isinstance(data, list), "roster.json must be a JSON array"
+          required = {"title", "handle", "diving", "since", "status", "blurb"}
+          allowed_status = {"scout", "build", "found", "crewtag"}
+          for i, e in enumerate(data):
+              assert isinstance(e, dict), f"entry {i} is not an object"
+              missing = required - set(e)
+              assert not missing, f"entry {i} is missing fields: {sorted(missing)}"
+              assert e["status"] in allowed_status, f"entry {i} has invalid status '{e['status']}' (use one of {sorted(allowed_status)})"
+          print(f"OK: {len(data)} valid crew entries")
+          PY

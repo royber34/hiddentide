@@ -62,6 +62,8 @@
   .toy .out{margin-top:1rem;font-family:'Space Grotesk';font-weight:700;font-size:1.3rem;color:var(--lantern);min-height:1.5em;}
   .toy .note{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:rgba(234,244,248,.5);margin-top:.5rem;}
   .how{background:rgba(62,242,209,.05);border:1px solid rgba(62,242,209,.16);border-radius:12px;padding:1.3rem 1.5rem;margin:1.2rem 0;}
+  .claimbtn{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:500;background:var(--lantern);color:#062033;border:none;border-bottom:none;border-radius:999px;padding:.55rem 1.1rem;margin:.2rem 0;transition:background .15s,transform .15s;}
+  .claimbtn:hover{background:#fff;color:#062033;transform:translateY(-1px);}
   .how ol{margin:.6rem 0 .3rem 1.2rem;} .how li{margin:.5rem 0;color:rgba(234,244,248,.86);}
   code{font-family:'JetBrains Mono',monospace;font-size:.82rem;background:rgba(3,15,28,.7);border:1px solid rgba(62,242,209,.16);border-radius:5px;padding:.12rem .4rem;color:var(--biolum);}
   footer{padding:3rem 0 4rem;border-top:1px solid rgba(62,242,209,.1);font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.45);margin-top:2rem;}
@@ -106,21 +108,21 @@
 <section id="claim"><div class="wrap">
   <h2><span class="num">03</span>How to claim a dive</h2>
   <p class="sub">The whole thing runs on GitHub, no server and no login to anything but GitHub, because that is where this crowd already lives. The ideas and the roster live in one repo; claiming is a one-line contribution.</p>
+  <p><a class="claimbtn" href="https://github.com/royber34/hiddentide/issues/new?template=claim-a-dive.yml" target="_blank" rel="noopener">&#9873; Claim a dive on GitHub &#8599;</a></p>
   <div class="how">
     <ol>
-      <li><strong>Pick your idea.</strong> Any of the 42, or a Category Zero engine. Note its number (say, <code>#11</code>, the snapping-shrimp thermometer).</li>
-      <li><strong>Open a claim.</strong> File an issue from the <code>claim a dive</code> template, or add one line to <code>roster.json</code> in a pull request: your handle, the idea number, and today's date.</li>
-      <li><strong>Get dubbed.</strong> On merge, a crew AI reads your public GitHub and gives you a proper expedition title. Your card appears on this board.</li>
-      <li><strong>Log what you find.</strong> Update your card's status as you go: <span class="chip scout">scouting</span> <span class="chip build">building</span> <span class="chip found">surfacing</span>. Post-null results too. A dead end honestly logged saves the next diver a week.</li>
+      <li><strong>Pick your mission.</strong> Any of the <a href="index.html#newly">42 ideas</a> or a Category Zero engine (Z1 to Z8). Every idea card has a <em>plant your flag</em> button that opens this form pre-filled with that mission.</li>
+      <li><strong>Open a claim.</strong> The button opens a short GitHub issue form: your handle, the mission, your status, one honest line. Prefer editing files directly? Add one object to <code>roster.json</code> via a pull request on the <a href="https://github.com/royber34/hiddentide" target="_blank" rel="noopener">repo</a> instead - a check keeps it valid.</li>
+      <li><strong>Get dubbed and appear.</strong> A maintainer merges your entry into <code>roster.json</code> with a Guide-given title, and your card shows up in the crew above on the next deploy.</li>
+      <li><strong>Log what you find.</strong> Update your status as you go: <span class="chip scout">scouting</span> <span class="chip build">building</span> <span class="chip found">surfacing</span>. Null results welcome - a dead end honestly logged saves the next diver a week.</li>
     </ol>
-    <p style="margin-top:.8rem;font-size:.86rem;color:rgba(234,244,248,.72)">Wiring note for the maintainer: point the claim button at <code>github.com/YOUR-ORG/ocean-guide/issues/new?template=claim.yml</code> and have a small action regenerate the roster from <code>roster.json</code>. New to GitHub? <a href="https://github.com" target="_blank" rel="noopener">start here</a>.</p>
   </div>
   <p class="sub" style="margin-top:1.4rem">One rule of the sea, same as everywhere else on this site: if you find something, it only counts once it <strong>replicates on data you did not use to find it</strong>. Bring the held-out slice, or bring nothing. <a href="method.html">The manual explains why &#8599;</a></p>
   <p><a href="index.html">&#8592; back to the Guide, and the 42 ideas</a></p>
 </div></section>
 
 <footer><div class="wrap">
-  <p>The first four names are the AI Dreamers from this run, shown honestly as such; every other slot is a real human. The crew list is generated from a roster file (roster.json) that the repo regenerates whenever someone claims a dive on GitHub, so it grows on its own. This board is a demo of the mechanism; wire it to a repo to make it live.</p>
+  <p>The first four names are the AI Dreamers from this run, shown honestly as such; every other slot is a real human. The crew list is generated from <a href="https://github.com/royber34/hiddentide/blob/main/roster.json" target="_blank" rel="noopener">roster.json</a>, which updates whenever someone claims a dive on GitHub, so it grows on its own. Claim one from any idea's <em>plant your flag</em> button, or straight from the <a href="https://github.com/royber34/hiddentide/issues/new?template=claim-a-dive.yml" target="_blank" rel="noopener">GitHub form</a>.</p>
   <p style="margin-top:1.2rem;opacity:.6">The Hitchhiker's Guide to the Ocean's Hidden Data &middot; the expedition roster. &middot; Hidden Tide &middot; hiddentide.com</p>
 </div></footer>
 
@@ -166,8 +168,21 @@ var ROLE=["Cartographer of the Deep","Whale-Whisperer","Reader of Dead Archives"
 function guideTitle(h){h=(h||'').replace(/^@/,'').trim();if(!h)return '';var s=0;for(var i=0;i<h.length;i++)s+=h.charCodeAt(i)*(i+1);var a=ADJ[s%ADJ.length];var r=ROLE[(s*7+3)%ROLE.length];return 'The '+a+' '+r;}
 var input=document.getElementById('handle');var out=document.getElementById('titleout');
 input.addEventListener('input',function(){var t=guideTitle(input.value);out.textContent=t||'The ...';});
-// contextual claim banner if arriving from a specific idea
-(function(){var m=(location.search||'').match(/idea=(\d+)/);var b=document.getElementById('claimbanner');if(m&&b){b.innerHTML='<div class="how" style="margin-top:1.6rem;background:rgba(255,209,102,.07);border-color:rgba(255,209,102,.3)">Idea <strong style="color:var(--lantern)">#'+m[1]+'</strong> caught your eye. Excellent taste. Here is <a href="#claim">how to plant your flag on it</a>, and try the title toy above to see what the Guide might call you.</div>';}})();
+// contextual per-mission claim: arriving from a specific mission (idea number + optional title)
+(function(){
+  var q=new URLSearchParams(location.search||'');
+  var idea=q.get('idea'); if(!idea) return;
+  var b=document.getElementById('claimbanner'); if(!b) return;
+  function he(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  var t=q.get('t')||'';
+  var missionLabel = t ? ('#'+idea+' - '+t) : ('idea #'+idea);
+  var missionParam = t ? (idea+' - '+t) : ('idea '+idea);
+  var issueUrl='https://github.com/royber34/hiddentide/issues/new?template=claim-a-dive.yml&title='+encodeURIComponent('Claim: '+missionParam)+'&mission='+encodeURIComponent(missionParam);
+  b.innerHTML='<div class="how" style="margin-top:1.6rem;background:rgba(255,209,102,.07);border-color:rgba(255,209,102,.3)">'
+    +'<strong style="color:var(--lantern)">'+he(missionLabel)+'</strong> caught your eye. Excellent taste. '
+    +'<a class="claimbtn" href="'+he(issueUrl)+'" target="_blank" rel="noopener">&#9873; Claim this mission on GitHub &#8599;</a>'
+    +'<span style="display:block;margin-top:.55rem;font-size:.86rem;color:rgba(234,244,248,.72)">It opens a short form, already filled with your mission. A maintainer adds you to the crew above. Try the title toy for a preview of what the Guide might call you.</span></div>';
+})();
 </script>
 </body>
 </html>

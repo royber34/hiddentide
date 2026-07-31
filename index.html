@@ -381,7 +381,7 @@ CH.forEach((c,ci)=>{
     card.innerHTML='<div class="card-face">'+
         '<div class="card-top"><span class="card-n">'+String(n).padStart(2,'0')+'</span><span class="card-title">'+title+'</span><span class="chev">&#9662;</span></div>'+
         '<div class="card-wow">'+wow+'</div>'+
-        '<div class="card-meta"><span class="rating">"'+rating+'"</span><span class="tierlab"><i class="dot '+tier+'"></i>'+TIERLABEL[tier]+'</span><a class="flaglink" href="roster.html?idea='+n+'" title="claim this idea on the roster">&#9873; plant your flag</a></div>'+
+        '<div class="card-meta"><span class="rating">"'+rating+'"</span><span class="tierlab"><i class="dot '+tier+'"></i>'+TIERLABEL[tier]+'</span><a class="flaglink" href="roster.html?idea='+n+'&amp;t='+encodeURIComponent(title)+'" title="claim this idea on the roster">&#9873; plant your flag</a></div>'+
       '</div>'+
       '<div class="card-body">'+
         '<div class="cb-lab">The data</div><div class="cb-txt">'+data+'</div>'+
