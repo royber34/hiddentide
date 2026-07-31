@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Manual in the Glovebox - How the Engine Works</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="The methods behind hypothesis-free ocean-data discovery: the fourth paradigm, symbolic regression, causal discovery, association mining, and the one rule that keeps it honest.">
+<meta name="theme-color" content="#030f1c">
+<meta property="og:title" content="The Manual in the Glovebox - How the Engine Works">
+<meta property="og:description" content="How to make the ocean confess without asking it a single question. The real methods, cited to primary sources.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://hiddentide.com/method.html">
+<meta property="og:site_name" content="Hidden Tide">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://hiddentide.com/method.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--surface:#8fd4e8;--photic:#3aa6c9;--twilight:#0e3f63;--deep:#07243b;--abyss:#030f1c;--ink:#062033;--paper:#eaf4f8;--biolum:#3ef2d1;--jelly:#ff5db1;--lantern:#ffd166;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:64px;}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--paper);background:var(--abyss);line-height:1.7;padding-top:44px;}
+  #topnav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.55rem clamp(1rem,4vw,2rem);background:rgba(3,15,28,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(62,242,209,.14);font-family:'JetBrains Mono',monospace;font-size:.76rem;}
+  #topnav a{border-bottom:none;color:rgba(234,244,248,.82);}
+  #topnav a:hover{color:#fff;}
+  #topnav .brand{color:var(--biolum);font-weight:500;}
+  #topnav .navlinks{display:flex;gap:1.1rem;flex-wrap:wrap;justify-content:flex-end;}
+  @media (max-width:600px){#topnav{font-size:.68rem;padding:.5rem .8rem;} #topnav .navlinks{gap:.7rem;}}
+  a{color:var(--biolum);text-decoration:none;border-bottom:1px solid rgba(62,242,209,.35);}
+  a:hover{color:#fff;border-color:#fff;}
+  h1,h2,h3,.disp{font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.14;font-weight:700;letter-spacing:-.02em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  #bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(to bottom,#0e3f63 0%,#07243b 40%,#030f1c 100%);}
+  .wrap{max-width:820px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.4rem);}
+  header{padding:clamp(3rem,7vw,6rem) 0 2rem;}
+  .back{font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.06em;border:none;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--jelly);margin:1.8rem 0 .6rem;}
+  h1{font-size:clamp(2rem,6vw,3.6rem);margin-bottom:1rem;}
+  .lede{font-size:clamp(1.05rem,1.8vw,1.25rem);color:rgba(234,244,248,.85);max-width:60ch;}
+  section{padding:2.2rem 0;border-top:1px solid rgba(62,242,209,.1);}
+  h2{font-size:clamp(1.4rem,3vw,2rem);color:var(--lantern);margin-bottom:.4rem;}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:.7em;color:var(--biolum);opacity:.6;margin-right:.5rem;}
+  p{margin:.9rem 0;color:rgba(234,244,248,.86);}
+  .surface-lead{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--biolum);text-transform:uppercase;letter-spacing:.08em;margin-top:1.2rem;}
+  .tool{background:rgba(14,63,99,.34);border:1px solid rgba(62,242,209,.14);border-radius:10px;padding:1.1rem 1.25rem;margin:.9rem 0;}
+  .tool h3{font-size:1.05rem;margin-bottom:.3rem;}
+  .tool .what{font-size:.9rem;color:rgba(234,244,248,.82);}
+  .tool .cite{font-family:'JetBrains Mono',monospace;font-size:.72rem;margin-top:.6rem;display:inline-block;}
+  .tool .caveat{font-size:.82rem;color:var(--lantern);opacity:.85;margin-top:.5rem;font-style:italic;}
+  .rule{background:rgba(255,93,177,.07);border:1px solid rgba(255,93,177,.24);border-radius:10px;padding:1.2rem 1.4rem;margin:1.2rem 0;}
+  .rule strong{color:var(--jelly);}
+  .honest{background:rgba(62,242,209,.05);border:1px solid rgba(62,242,209,.16);border-radius:10px;padding:1.2rem 1.4rem;margin:1.2rem 0;}
+  .honest strong{color:var(--biolum);}
+  ul{margin:.6rem 0 .6rem 1.2rem;} li{margin:.35rem 0;color:rgba(234,244,248,.86);}
+  footer{padding:3rem 0 4rem;border-top:1px solid rgba(62,242,209,.1);font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.45);}
+  .refs{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.6);}
+  .refs li{margin:.4rem 0;}
+</style>
+</head>
+<body>
+<nav id="topnav">
+  <a class="brand" href="index.html">&#8776; Hidden Tide</a>
+  <div class="navlinks">
+    <a href="index.html#newly">the 42</a>
+    <a href="index.html#zero">Category Zero</a>
+    <a href="roster.html">the roster</a>
+    <a href="method.html">the manual</a>
+  </div>
+</nav>
+<div id="bg"></div>
+<header><div class="wrap">
+  <a class="back" href="index.html">&#8592; back to the Guide</a>
+  <div class="eyebrow">The manual the Guide's engineers left in the glovebox</div>
+  <h1>How to make the ocean confess without asking it a single question</h1>
+  <p class="lede">Category Zero says: stop guessing, fuse everything, and let the structure nominate the questions. Here is the actual machinery, the real papers behind it, and the one rule that stops the whole thing from being elaborate nonsense. Cheeky, but every method below is real and cited.</p>
+</div></header>
+
+<section><div class="wrap">
+  <h2><span class="num">00</span>There is a name for not asking questions</h2>
+  <p>It is called <strong>data-intensive</strong>, or <strong>data-driven</strong>, or <strong>hypothesis-free</strong> discovery. Jim Gray called it the <em>fourth paradigm</em> of science, a mode as distinct from theory and experiment as those are from each other: you start from the data, at scale, and let patterns nominate the theory rather than the other way around. The ocean is a near-perfect candidate, because it has been generating far more data than anyone has had the working memory to combine.</p>
+  <p class="cite mono">&rarr; Hey, Tansley &amp; Tolle (eds.), <a href="https://www.microsoft.com/en-us/research/publication/fourth-paradigm-data-intensive-scientific-discovery/" target="_blank" rel="noopener">The Fourth Paradigm</a>, 2009.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">01</span>Three ways structure can surprise you</h2>
+  <p>A machine can hunt all three at once, across more variables than a person can hold, and with no opinion about which fields are allowed to talk to each other. Each one has real, off-the-shelf tooling.</p>
+
+  <div class="surface-lead">Surface A - Anomalies (where the structure breaks)</div>
+  <div class="tool">
+    <h3>Reconstruction-error anomaly detection</h3>
+    <div class="what">Teach a model to rebuild the whole fused ocean state from itself. The moments it cannot rebuild are the anomalies. A break in one channel is usually a broken sensor; a break across several at once, that the rest of the state cannot explain, is the interesting kind.</div>
+    <div class="cite mono">&rarr; Chandola, Banerjee &amp; Kumar, <a href="https://doi.org/10.1145/1541880.1541882" target="_blank" rel="noopener">Anomaly Detection: A Survey</a>, ACM Comput. Surv. 2009.</div>
+    <div class="caveat">The honest caveat we learned the hard way: reconstruction error is a triage filter, not a discoverer. Autoencoders can rebuild genuinely new things with deceptively low error, and in particle physics this exact approach has found no new physics despite years of trying. Treat every flag as a suspect, not a verdict.</div>
+  </div>
+
+  <div class="surface-lead">Surface B - Couplings (relationships nobody wrote down)</div>
+  <div class="tool">
+    <h3>Symbolic regression: make it confess the formula</h3>
+    <div class="what">Instead of predicting a number, ask the machine for the shortest <em>equation</em> linking the variables, without telling it the form. A compact, accurate law that sits in no textbook is a genuine find.</div>
+    <div class="cite mono">&rarr; Brunton, Proctor &amp; Kutz, <a href="https://www.pnas.org/doi/10.1073/pnas.1517384113" target="_blank" rel="noopener">SINDy</a>, PNAS 2016 &middot; Udrescu &amp; Tegmark, <a href="https://arxiv.org/abs/1905.11481" target="_blank" rel="noopener">AI Feynman</a>, Science Advances 2020.</div>
+  </div>
+  <div class="tool">
+    <h3>Causal discovery: correlation that points</h3>
+    <div class="what">Infer the directed graph of which signal drives which, straight from the multivariate time series, with no hypothesis supplied. It is built for exactly this and is already used in climate science. An arrow nobody has drawn is a candidate.</div>
+    <div class="cite mono">&rarr; Runge et al., <a href="https://doi.org/10.1126/sciadv.aau4996" target="_blank" rel="noopener">PCMCI</a>, Science Advances 2019 (the Tigramite package).</div>
+  </div>
+  <div class="tool">
+    <h3>Association mining: every pair, any shape</h3>
+    <div class="what">Score every variable pair for dependency of <em>any</em> functional form, including the cross-modal pairs no discipline bothers to compare. Surfaces non-obvious, non-linear links a straight correlation would miss.</div>
+    <div class="cite mono">&rarr; Reshef et al., <a href="https://doi.org/10.1126/science.1205438" target="_blank" rel="noopener">Detecting Novel Associations in Large Data Sets (MIC)</a>, Science 2011.</div>
+  </div>
+
+  <div class="surface-lead">Surface C - Regimes (moods the ocean has and nobody named)</div>
+  <div class="tool">
+    <h3>Self-supervised embeddings, then look at the geometry</h3>
+    <div class="what">Learn one latent representation over every modality with no labels, then cluster it through time. Unexpected regimes, boundaries that moved, or two modalities that turn out to share a latent shape are all structure hiding in plain sight.</div>
+    <div class="cite mono">&rarr; Jakubik et al., <a href="https://arxiv.org/abs/2310.18660" target="_blank" rel="noopener">Prithvi geospatial foundation model</a>, 2023 &middot; Chen et al., <a href="https://arxiv.org/abs/2002.05709" target="_blank" rel="noopener">SimCLR</a>, ICML 2020.</div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">02</span>The one rule, or it is all ghosts</h2>
+  <div class="rule">
+    <p style="margin-top:0">Here is the trap. Point a tireless machine at every possible correlation and it will find millions, and nearly all of them are noise dressed as signal. The number of ways to slice data is astronomical, and if you go looking you will always find <em>something</em>. Statisticians call it the <strong>garden of forking paths</strong>: even honest, unplanned choices inflate false positives until a chance pattern looks profound.</p>
+    <p class="cite mono">&rarr; Gelman &amp; Loken, <a href="https://sites.stat.columbia.edu/gelman/research/unpublished/p_hacking.pdf" target="_blank" rel="noopener">The Garden of Forking Paths</a>, 2013.</p>
+  </div>
+  <p>So the discovery is never the correlation. The discovery is the correlation that <strong>survives</strong>. The rule, non-negotiable:</p>
+  <ul>
+    <li><strong>Discover</strong> the pattern on one slice of space or time.</li>
+    <li><strong>Freeze</strong> it: the exact relationship, the coefficients, the threshold.</li>
+    <li><strong>Confirm</strong> it on a slice the model never touched during the search. If it does not replicate there, it was a ghost.</li>
+    <li><strong>Refute</strong> it: hand it to an agent whose only job is to kill it, on data, novelty, and feasibility. What survives the assassin is worth a human's time.</li>
+  </ul>
+  <p class="cite mono">&rarr; The held-out principle is old and boring and load-bearing: Kohavi, <a href="https://dl.acm.org/doi/10.5555/1643031.1643047" target="_blank" rel="noopener">A Study of Cross-Validation</a>, IJCAI 1995.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">03</span>How we kept ourselves honest (this site included)</h2>
+  <div class="honest">
+    <p style="margin-top:0">This whole Guide was built collaboratively by AI agents, which is exactly the kind of thing that fools itself if you let it. So the same discipline that guards Category Zero guarded the build:</p>
+    <ul>
+      <li><strong>The author is never the grader.</strong> Every deliverable was scored by a fresh agent that did not write it, and for the novelty and final calls, by a <em>different model</em> entirely.</li>
+      <li><strong>Grade on external ground truth, not the machine's own confidence.</strong> A dataset counts as available only when a reviewer actually fetched its page. A claim counts only with a working citation.</li>
+      <li><strong>Availability is not data.</strong> Every check here confirmed that a source resolves and is free. Not one byte was pulled. We say so, loudly, rather than let a documentation check pose as a result.</li>
+    </ul>
+    <p>None of this makes the machine right. It makes it <em>catchable when it is wrong</em>, which is the most you can honestly ask of a discovery engine, silicon or otherwise.</p>
+  </div>
+  <p><a href="index.html">&#8592; back to the Guide, and the 42 ideas</a></p>
+</div></section>
+
+<footer><div class="wrap">
+  <p class="refs mono">Every method above is real and peer-reviewed or a recognized standard; links go to the primary source. The point of this page is that "let the AI find patterns nobody looked for" is a real, named, tooled discipline, not magic, and that its one hard problem has a known and unglamorous answer: hold something out, and try to kill what you find.</p>
+  <p style="margin-top:1.4rem;opacity:.6">The Hitchhiker's Guide to the Ocean's Hidden Data &middot; the manual, glovebox edition. &middot; Hidden Tide &middot; hiddentide.com</p>
+</div></footer>
+</body>
+</html>

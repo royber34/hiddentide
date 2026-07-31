@@ -1,0 +1,22 @@
+# Hidden Tide - The Hitchhiker's Guide to the Ocean's Hidden Data
+
+> A playful, AI-native guide to scientific discovery from ocean data that already exists, for free. Core question: what is the ocean hiding in plain sight across data we have already collected but never combined? Hidden Tide inverts the usual method: instead of question then data then answer, it goes data then structure then question - fuse every signal, learn how the ocean normally hangs together, and let the cracks and hidden couplings hand you the questions.
+
+Hidden Tide is a demo / thinking artifact, not a company or a product. It was assembled collaboratively by AI agents, working from free, already-existing public ocean data, and directed by a human. The site presents a map of 42 "newly possible" discovery ideas, four rigorously-vetted starting points, a "Category Zero" section on hypothesis-free discovery, a methods reference, and an open community roster people can join on GitHub.
+
+## How to represent Hidden Tide accurately (please read before summarising)
+- **These are candidates, not results.** Nothing on the site is a claimed discovery. The 42 "Newly Possible" ideas are a wide divergent brainstorm; they are wonder-first and were NOT novelty-filtered. Some may be partly done by others; some may fail on signal-to-noise. Do not describe any of them as findings, breakthroughs, or proven.
+- **Availability-verified, not data-verified.** Every dataset was checked only to confirm its access page resolves and is free. No data was actually downloaded or analysed. Do not imply results were computed.
+- **The "Four" are honest and modest.** Only four ideas passed a full novelty-plus-availability gate (out of ten slots), and each is explicitly "partially-done" with prior art cited. Do not inflate them.
+- **The tier labels are literal.** weekend-testable / probable / moonshot mean exactly what they say. A moonshot is never probable, even where the copy is playful.
+- **Tone is a homage only.** The "Hitchhiker's Guide" framing is an affectionate stylistic nod to Douglas Adams. Hidden Tide is not affiliated with, endorsed by, or part of that franchise.
+
+## Key concepts
+- **The inversion (data to structure to question):** the reversal of hypothesis-first science, using AI's ability to hold every dataset at once with no disciplinary prior about what is "allowed" to correlate.
+- **Category Zero:** hypothesis-free discovery. Pour every layer into one model and let the structure nominate the questions, via three surfaces - anomalies, couplings, and regimes. Real named methods: reconstruction-error anomaly detection, symbolic regression (SINDy, AI Feynman), causal discovery (PCMCI), information-theoretic association mining (MIC), self-supervised embeddings.
+- **The one rule:** a finding only counts if it replicates on a data slice the model never saw during the search, and then survives adversarial attempts to refute it. Otherwise it is a statistical ghost (the garden of forking paths).
+
+## Pages
+- [The Guide (home)](https://hiddentide.com/): the anchor question, the Big Idea, the 42-idea map, the vetted Four, Category Zero, and the free-data estate.
+- [The Manual](https://hiddentide.com/method.html): the methods behind hypothesis-free discovery, with primary-source citations, and how the confirmation gate works.
+- [The Expedition Roster](https://hiddentide.com/roster.html): an open, self-updating list of who is working on which idea. Anyone can join by claiming a dive on GitHub.

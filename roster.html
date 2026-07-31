@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Expedition Roster - Who's Down There</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="The expedition roster: who is diving on which ocean-data idea. An open, self-updating crew list. Pick an idea and plant your flag.">
+<meta name="theme-color" content="#030f1c">
+<meta property="og:title" content="The Expedition Roster - Who's Down There">
+<meta property="og:description" content="Pick an idea, plant your flag, join the crew. An open dive into the ocean's hidden data.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hiddentide.com/roster.html">
+<meta property="og:site_name" content="Hidden Tide">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://hiddentide.com/roster.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--surface:#8fd4e8;--photic:#3aa6c9;--twilight:#0e3f63;--deep:#07243b;--abyss:#030f1c;--ink:#062033;--paper:#eaf4f8;--biolum:#3ef2d1;--jelly:#ff5db1;--lantern:#ffd166;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:64px;}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--paper);background:var(--abyss);line-height:1.65;padding-top:44px;}
+  #topnav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.55rem clamp(1rem,4vw,2rem);background:rgba(3,15,28,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(62,242,209,.14);font-family:'JetBrains Mono',monospace;font-size:.76rem;}
+  #topnav a{border-bottom:none;color:rgba(234,244,248,.82);}
+  #topnav a:hover{color:#fff;}
+  #topnav .brand{color:var(--biolum);font-weight:500;}
+  #topnav .navlinks{display:flex;gap:1.1rem;flex-wrap:wrap;justify-content:flex-end;}
+  @media (max-width:600px){#topnav{font-size:.68rem;padding:.5rem .8rem;} #topnav .navlinks{gap:.7rem;}}
+  a{color:var(--biolum);text-decoration:none;border-bottom:1px solid rgba(62,242,209,.35);}
+  a:hover{color:#fff;border-color:#fff;}
+  h1,h2,h3,.disp{font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.14;font-weight:700;letter-spacing:-.02em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  #bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(to bottom,#0e3f63 0%,#07243b 44%,#030f1c 100%);}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.6rem);}
+  header{padding:clamp(3rem,7vw,6rem) 0 1.4rem;}
+  .back{font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.06em;border:none;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lantern);margin:1.8rem 0 .6rem;}
+  h1{font-size:clamp(2.1rem,6.5vw,4rem);margin-bottom:1rem;}
+  .lede{font-size:clamp(1.05rem,1.8vw,1.25rem);color:rgba(234,244,248,.86);max-width:62ch;}
+  section{padding:2rem 0;}
+  h2{font-size:clamp(1.4rem,3vw,2rem);color:var(--lantern);margin-bottom:.3rem;}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:.7em;color:var(--biolum);opacity:.6;margin-right:.5rem;}
+  .sub{color:rgba(234,244,248,.72);max-width:64ch;margin-bottom:1.4rem;}
+  .roster{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;}
+  .crew{background:rgba(14,63,99,.36);border:1px solid rgba(62,242,209,.14);border-radius:12px;padding:1.2rem 1.3rem;position:relative;}
+  .crew .title{font-family:'Space Grotesk';font-weight:700;font-size:1.12rem;color:var(--paper);margin-bottom:.15rem;line-height:1.15;}
+  .crew .handle{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--biolum);}
+  .crew .row{display:flex;justify-content:space-between;gap:.6rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:rgba(234,244,248,.62);margin-top:.9rem;}
+  .crew .diving{font-size:.86rem;color:rgba(234,244,248,.85);margin-top:.7rem;}
+  .crew .blurb{font-size:.83rem;color:rgba(234,244,248,.68);font-style:italic;margin-top:.7rem;}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;padding:.18rem .5rem;border-radius:3px;display:inline-block;}
+  .chip.scout{background:rgba(255,209,102,.14);color:var(--lantern);border:1px solid rgba(255,209,102,.28);}
+  .chip.build{background:rgba(62,242,209,.14);color:var(--biolum);border:1px solid rgba(62,242,209,.3);}
+  .chip.found{background:rgba(255,93,177,.14);color:var(--jelly);border:1px solid rgba(255,93,177,.3);}
+  .chip.crewtag{background:rgba(234,244,248,.08);color:rgba(234,244,248,.6);border:1px solid rgba(234,244,248,.16);}
+  .flag{background:linear-gradient(150deg,rgba(62,242,209,.1),rgba(255,209,102,.07));border:1px dashed rgba(62,242,209,.4);}
+  .flag .title{color:var(--biolum);}
+  .toy{background:rgba(2,10,20,.6);border:1px solid rgba(62,242,209,.18);border-radius:12px;padding:1.4rem 1.5rem;margin:1.4rem 0;}
+  .toy label{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:rgba(234,244,248,.7);display:block;margin-bottom:.6rem;}
+  .toy input{font-family:'JetBrains Mono',monospace;font-size:.95rem;background:rgba(3,15,28,.8);color:var(--paper);border:1px solid rgba(62,242,209,.3);border-radius:8px;padding:.6rem .8rem;width:min(320px,100%);}
+  .toy .out{margin-top:1rem;font-family:'Space Grotesk';font-weight:700;font-size:1.3rem;color:var(--lantern);min-height:1.5em;}
+  .toy .note{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:rgba(234,244,248,.5);margin-top:.5rem;}
+  .how{background:rgba(62,242,209,.05);border:1px solid rgba(62,242,209,.16);border-radius:12px;padding:1.3rem 1.5rem;margin:1.2rem 0;}
+  .how ol{margin:.6rem 0 .3rem 1.2rem;} .how li{margin:.5rem 0;color:rgba(234,244,248,.86);}
+  code{font-family:'JetBrains Mono',monospace;font-size:.82rem;background:rgba(3,15,28,.7);border:1px solid rgba(62,242,209,.16);border-radius:5px;padding:.12rem .4rem;color:var(--biolum);}
+  footer{padding:3rem 0 4rem;border-top:1px solid rgba(62,242,209,.1);font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.45);margin-top:2rem;}
+</style>
+</head>
+<body>
+<nav id="topnav">
+  <a class="brand" href="index.html">&#8776; Hidden Tide</a>
+  <div class="navlinks">
+    <a href="index.html#newly">the 42</a>
+    <a href="index.html#zero">Category Zero</a>
+    <a href="roster.html">the roster</a>
+    <a href="method.html">the manual</a>
+  </div>
+</nav>
+<div id="bg"></div>
+<header><div class="wrap">
+  <a class="back" href="index.html">&#8592; back to the Guide</a>
+  <div class="eyebrow">The Expedition Roster</div>
+  <h1>Who's down there?</h1>
+  <p class="lede">This is an open dive. Every one of the 42 ideas, and Category Zero itself, is unclaimed until someone plants a flag. No permission needed, no committee, no grant. Pick one that makes you say "wait, is that possible?", write your name in the log, and go find out. Here is who is already in the water.</p>
+  <div id="claimbanner"></div>
+</div></header>
+
+<section><div class="wrap">
+  <h2><span class="num">01</span>The crew</h2>
+  <p class="sub">Everyone who has plunged in, in order of joining. The first four are the AI Dreamers that charted the map, one per chapter (labelled clearly as such); the rest are humans who picked up a dive. This list updates itself: when someone claims an idea on GitHub, their card shows up here.</p>
+  <div class="roster" id="crew"></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">02</span>Your flag here</h2>
+  <p class="sub">Curious what the Guide would call you? Type a GitHub handle and get a provisional dubbing. (It is a bit of fun from a name generator; your <em>real</em> title gets assigned when a crew AI actually reads your GitHub on claim.)</p>
+  <div class="toy">
+    <label for="handle">GitHub handle</label>
+    <input id="handle" type="text" placeholder="@yourhandle" autocomplete="off" spellcheck="false">
+    <div class="out" id="titleout">The ...</div>
+    <div class="note" id="note">provisional. the ocean reserves the right to rename you.</div>
+  </div>
+</div></section>
+
+<section id="claim"><div class="wrap">
+  <h2><span class="num">03</span>How to claim a dive</h2>
+  <p class="sub">The whole thing runs on GitHub, no server and no login to anything but GitHub, because that is where this crowd already lives. The ideas and the roster live in one repo; claiming is a one-line contribution.</p>
+  <div class="how">
+    <ol>
+      <li><strong>Pick your idea.</strong> Any of the 42, or a Category Zero engine. Note its number (say, <code>#11</code>, the snapping-shrimp thermometer).</li>
+      <li><strong>Open a claim.</strong> File an issue from the <code>claim a dive</code> template, or add one line to <code>roster.json</code> in a pull request: your handle, the idea number, and today's date.</li>
+      <li><strong>Get dubbed.</strong> On merge, a crew AI reads your public GitHub and gives you a proper expedition title. Your card appears on this board.</li>
+      <li><strong>Log what you find.</strong> Update your card's status as you go: <span class="chip scout">scouting</span> <span class="chip build">building</span> <span class="chip found">surfacing</span>. Post-null results too. A dead end honestly logged saves the next diver a week.</li>
+    </ol>
+    <p style="margin-top:.8rem;font-size:.86rem;color:rgba(234,244,248,.72)">Wiring note for the maintainer: point the claim button at <code>github.com/YOUR-ORG/ocean-guide/issues/new?template=claim.yml</code> and have a small action regenerate the roster from <code>roster.json</code>. New to GitHub? <a href="https://github.com" target="_blank" rel="noopener">start here</a>.</p>
+  </div>
+  <p class="sub" style="margin-top:1.4rem">One rule of the sea, same as everywhere else on this site: if you find something, it only counts once it <strong>replicates on data you did not use to find it</strong>. Bring the held-out slice, or bring nothing. <a href="method.html">The manual explains why &#8599;</a></p>
+  <p><a href="index.html">&#8592; back to the Guide, and the 42 ideas</a></p>
+</div></section>
+
+<footer><div class="wrap">
+  <p>The first four names are the AI Dreamers from this run, shown honestly as such; every other slot is a real human. The crew list is generated from a roster file (roster.json) that the repo regenerates whenever someone claims a dive on GitHub, so it grows on its own. This board is a demo of the mechanism; wire it to a repo to make it live.</p>
+  <p style="margin-top:1.2rem;opacity:.6">The Hitchhiker's Guide to the Ocean's Hidden Data &middot; the expedition roster. &middot; Hidden Tide &middot; hiddentide.com</p>
+</div></footer>
+
+<script>
+// Seed = the AI Dreamers from this run. In production the page renders from roster.json
+// (a file the repo regenerates whenever someone claims a dive on GitHub), falling back to this seed.
+var SEED=[
+ {title:"The Reader of Dead Archives", handle:"the Time-Traveler (AI)", github:null, diving:"Chapter I - The Time Machine", link:"index.html#idea-1", since:"2026-07-07", status:"crewtag", statusText:"charted the map", blurb:"Digitized rooms of paper nobody had read. Left ten leads and a faint smell of mildew."},
+ {title:"The Whale-Whisperer", handle:"the Eavesdropper (AI)", github:null, diving:"Chapter II - The Eavesdropper", link:"index.html#idea-11", since:"2026-07-07", status:"crewtag", statusText:"charted the map", blurb:"Pulled the whales, shrimp and ships apart from a single hydrophone. The shrimp were the surprise."},
+ {title:"The Xenobiologist-at-Large", handle:"the Xenobiologist (AI)", github:null, diving:"Chapter III - The Xenobiologist", link:"index.html#idea-20", since:"2026-07-07", status:"crewtag", statusText:"charted the map", blurb:"Read turtles as magnetometers and fishing fleets as tsunami sensors. Regrets nothing."},
+ {title:"The Diviner of Couplings", handle:"the Structure-Seer (AI)", github:null, diving:"Chapter IV - The Structure-Seer", link:"index.html#idea-28", since:"2026-07-07", status:"crewtag", statusText:"charted the map", blurb:"Coupled things that should not talk to each other. A few of them talked back."}
+];
+var el=document.getElementById('crew');
+function esc(s){return String(s==null?'':s);}
+function renderCrew(list){
+  el.innerHTML='';
+  list.forEach(function(c){
+    var handleHTML = c.github ? '<a href="'+esc(c.github)+'" target="_blank" rel="noopener">'+esc(c.handle)+'</a>' : esc(c.handle);
+    var d=document.createElement('div');d.className='crew';
+    d.innerHTML='<div class="title">'+esc(c.title)+'</div><div class="handle">'+handleHTML+'</div>'+
+      '<div class="diving">Diving on: <a href="'+esc(c.link||'index.html#newly')+'">'+esc(c.diving)+'</a></div>'+
+      '<div class="blurb">"'+esc(c.blurb)+'"</div>'+
+      '<div class="row"><span>aboard since '+esc(c.since)+'</span><span class="chip '+esc(c.status||'scout')+'">'+esc(c.statusText||c.status||'aboard')+'</span></div>';
+    el.appendChild(d);
+  });
+  // trailing open slot, always last: this is where the next human lands
+  var flag=document.createElement('div');flag.className='crew flag';
+  flag.innerHTML='<div class="title">The [your title here]</div><div class="handle">@you</div>'+
+    '<div class="diving">Diving on: <a href="index.html#newly">any idea you like</a></div>'+
+    '<div class="blurb">"this card is waiting for you. it has been waiting a while. do not keep the ocean."</div>'+
+    '<div class="row"><span>aboard since the day you claim it</span><span class="chip scout">unclaimed</span></div>';
+  el.appendChild(flag);
+}
+renderCrew(SEED); // render immediately (works offline / file://)
+// live source of truth: roster.json in the repo, regenerated when someone claims a dive on GitHub
+fetch('roster.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(data){
+  if(Array.isArray(data) && data.length){ renderCrew(data); }
+}).catch(function(){});
+
+// provisional title generator (deterministic, just for fun)
+var ADJ=["Abyssal","Bioluminescent","Tireless","Improbable","Cosmic","Barnacled","Salt-Crusted","Nocturnal","Uncharted","Deep-Dwelling","Sonar-Eared","Tide-Bitten","Unblinking","Bathyal"];
+var ROLE=["Cartographer of the Deep","Whale-Whisperer","Reader of Dead Archives","Wrangler of Lost Signals","Diviner of Couplings","Keeper of the Sonar","Xenobiologist-at-Large","Chief of the Cosmic-Ray Division","Auditor of the Reanalysis","Listener to the Hum","Charter of Ocean Moods","Finder of Ghosts","Weigher of Invisible Ships","Translator of Whalesong"];
+function guideTitle(h){h=(h||'').replace(/^@/,'').trim();if(!h)return '';var s=0;for(var i=0;i<h.length;i++)s+=h.charCodeAt(i)*(i+1);var a=ADJ[s%ADJ.length];var r=ROLE[(s*7+3)%ROLE.length];return 'The '+a+' '+r;}
+var input=document.getElementById('handle');var out=document.getElementById('titleout');
+input.addEventListener('input',function(){var t=guideTitle(input.value);out.textContent=t||'The ...';});
+// contextual claim banner if arriving from a specific idea
+(function(){var m=(location.search||'').match(/idea=(\d+)/);var b=document.getElementById('claimbanner');if(m&&b){b.innerHTML='<div class="how" style="margin-top:1.6rem;background:rgba(255,209,102,.07);border-color:rgba(255,209,102,.3)">Idea <strong style="color:var(--lantern)">#'+m[1]+'</strong> caught your eye. Excellent taste. Here is <a href="#claim">how to plant your flag on it</a>, and try the title toy above to see what the Guide might call you.</div>';}})();
+</script>
+</body>
+</html>

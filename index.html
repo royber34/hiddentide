@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hitchhiker's Guide to the Ocean's Hidden Data</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Hidden Tide: a playful guide to AI-native discovery from ocean data that already exists.">
+<meta property="og:title" content="The Hitchhiker's Guide to the Ocean's Hidden Data">
+<meta property="og:description" content="What is the ocean hiding in plain sight across data we've already collected but never combined?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hiddentide.com/">
+<meta property="og:site_name" content="Hidden Tide">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Hitchhiker's Guide to the Ocean's Hidden Data">
+<meta name="twitter:description" content="What is the ocean hiding in plain sight across data we've already collected but never combined?">
+<meta name="theme-color" content="#030f1c">
+<link rel="canonical" href="https://hiddentide.com/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Hidden Tide","alternateName":"The Hitchhiker's Guide to the Ocean's Hidden Data","url":"https://hiddentide.com/","description":"A playful guide to AI-native discovery from free ocean data that already exists. What is the ocean hiding in plain sight across data we have already collected but never combined?","inLanguage":"en"}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --surface:#8fd4e8; --photic:#3aa6c9; --twilight:#0e3f63; --deep:#07243b; --abyss:#030f1c;
+    --ink:#062033; --paper:#eaf4f8;
+    --biolum:#3ef2d1; --jelly:#ff5db1; --lantern:#ffd166;
+    --mx:50vw; --my:50vh;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:64px;}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--paper);background:var(--abyss);line-height:1.6;overflow-x:hidden;}
+  a{color:var(--biolum);text-decoration:none;border-bottom:1px solid rgba(62,242,209,.3);}
+  a:hover{color:#fff;border-color:#fff;}
+  h1,h2,h3,.disp{font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.12;font-weight:700;letter-spacing:-.02em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  #depthbg{position:fixed;inset:0;z-index:-2;background:linear-gradient(to bottom,
+     var(--surface) 0%, var(--photic) 6%, #1b6a93 14%, var(--twilight) 26%, var(--deep) 44%, var(--abyss) 66%, var(--abyss) 100%);}
+  #grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;
+     background-image:radial-gradient(circle at 20% 30%, #fff 0.5px, transparent 0.6px),radial-gradient(circle at 70% 60%, #fff 0.5px, transparent 0.6px);background-size:120px 120px,90px 90px;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 clamp(1.1rem,4vw,3rem);}
+  section{padding:clamp(3.5rem,7vw,7rem) 0;position:relative;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;opacity:.8;}
+  #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;color:var(--ink);
+     background:linear-gradient(168deg,#bfe8f4 0%,#8ecfe3 40%,#5eb6d3 74%,#3aa6c9 100%);}
+  #hero .eyebrow{color:var(--ink);opacity:.7;}
+  .dontpanic{font-family:'Space Grotesk';font-weight:700;font-size:clamp(2.4rem,9vw,6rem);letter-spacing:-.04em;color:var(--ink);margin:.4rem 0 .2rem;line-height:.95;}
+  .dontpanic small{display:block;font-size:.26em;letter-spacing:.02em;font-weight:500;opacity:.7;margin-top:.6rem;}
+  #hero h1{font-size:clamp(1.4rem,3.4vw,2.5rem);color:var(--ink);max-width:20ch;margin:2rem 0 1.2rem;font-weight:600;}
+  #bigidea{background:rgba(7,36,59,.28);}
+  #zero .card-wow{color:rgba(234,244,248,.86);}
+  #zero .card-title{color:var(--paper);}
+  #bootline{font-family:'JetBrains Mono',monospace;font-size:clamp(.85rem,1.4vw,1rem);color:var(--ink);opacity:.8;max-width:56ch;min-height:2.6em;}
+  .divecue{margin-top:2.6rem;font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:.14em;color:var(--ink);opacity:.65;display:inline-flex;align-items:center;gap:.5rem;}
+  .divecue span{animation:bob 2s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+  .sec-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--biolum);opacity:.85;margin-bottom:.6rem;}
+  .sec-title{font-size:clamp(1.7rem,4vw,3rem);margin-bottom:.6rem;}
+  .sec-intro{max-width:64ch;color:rgba(234,244,248,.8);font-size:1.02rem;}
+  .controls{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin:2rem 0 1.4rem;}
+  .drive{font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:.04em;cursor:pointer;
+     background:linear-gradient(90deg,rgba(62,242,209,.16),rgba(255,209,102,.14));color:var(--lantern);
+     border:1px solid rgba(255,209,102,.4);border-radius:999px;padding:.55rem 1.1rem;transition:transform .15s,box-shadow .2s;}
+  .drive:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(255,209,102,.18);}
+  .drive:active{transform:scale(.97);}
+  .filters{display:flex;gap:.4rem;flex-wrap:wrap;}
+  .fbtn{font-family:'JetBrains Mono',monospace;font-size:.7rem;cursor:pointer;background:rgba(234,244,248,.06);color:rgba(234,244,248,.75);
+     border:1px solid rgba(234,244,248,.14);border-radius:999px;padding:.42rem .8rem;display:inline-flex;align-items:center;gap:.4rem;}
+  .fbtn[aria-pressed="true"]{background:rgba(62,242,209,.14);color:#fff;border-color:rgba(62,242,209,.5);}
+  .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block;}
+  .g{background:var(--biolum);} .y{background:var(--lantern);} .r{background:var(--jelly);}
+  .counter{font-family:'JetBrains Mono',monospace;font-size:.72rem;opacity:.55;margin-left:auto;}
+  .chapter{margin-top:2.6rem;}
+  .chapter h3{font-size:1.15rem;color:var(--lantern);font-weight:600;margin-bottom:.2rem;display:flex;gap:.6rem;align-items:baseline;}
+  .chapter .cnum{font-family:'JetBrains Mono',monospace;font-size:.8rem;opacity:.5;}
+  .chapter .csub{font-size:.86rem;color:rgba(234,244,248,.6);margin-bottom:1.1rem;max-width:70ch;font-style:italic;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.9rem;}
+  .card{background:rgba(14,63,99,.34);border:1px solid rgba(62,242,209,.12);border-radius:12px;overflow:hidden;
+     transition:transform .15s,border-color .2s,box-shadow .2s;}
+  .card:hover{border-color:rgba(62,242,209,.34);transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.28);}
+  .card.spot{border-color:var(--lantern);box-shadow:0 0 0 2px rgba(255,209,102,.5),0 12px 40px rgba(255,209,102,.2);}
+  .card-face{padding:1.05rem 1.15rem;cursor:pointer;user-select:none;}
+  .card-top{display:flex;align-items:center;gap:.55rem;margin-bottom:.5rem;}
+  .card-n{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--biolum);opacity:.7;}
+  .card-title{font-family:'Space Grotesk';font-weight:600;font-size:1rem;flex:1;}
+  .card-wow{font-size:.88rem;color:rgba(234,244,248,.82);}
+  .card-meta{display:flex;align-items:center;gap:.5rem;margin-top:.7rem;flex-wrap:wrap;}
+  .rating{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--lantern);opacity:.85;font-style:italic;flex:1;min-width:140px;}
+  .flaglink{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--lantern);border:1px solid rgba(255,209,102,.32);border-radius:999px;padding:.12rem .55rem;border-bottom:1px solid rgba(255,209,102,.32);white-space:nowrap;}
+  .flaglink:hover{background:rgba(255,209,102,.14);color:#fff;border-color:#fff;}
+  .inversion{margin:1.6rem 0;display:flex;flex-direction:column;gap:.6rem;max-width:66ch;}
+  .inv-row{display:flex;align-items:baseline;gap:.9rem;flex-wrap:wrap;padding:.7rem 1rem;border-radius:9px;border:1px solid;}
+  .inv-row.old{border-color:rgba(234,244,248,.14);background:rgba(234,244,248,.03);}
+  .inv-row.new{border-color:rgba(62,242,209,.3);background:rgba(62,242,209,.06);}
+  .inv-tag{font-family:'JetBrains Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;opacity:.65;min-width:66px;}
+  .inv-row.new .inv-tag{color:var(--biolum);opacity:1;}
+  .inv-flow{font-family:'Space Grotesk';font-weight:600;font-size:1.08rem;}
+  .inv-row.old .inv-flow{color:rgba(234,244,248,.5);}
+  .inv-row.new .inv-flow{color:var(--paper);}
+  .inv-note{font-family:'JetBrains Mono',monospace;font-size:.68rem;opacity:.6;}
+  #topnav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.55rem clamp(1rem,4vw,2rem);background:rgba(3,15,28,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(62,242,209,.14);font-family:'JetBrains Mono',monospace;font-size:.76rem;}
+  #topnav a{border-bottom:none;color:rgba(234,244,248,.82);}
+  #topnav a:hover{color:#fff;}
+  #topnav .brand{color:var(--biolum);font-weight:500;}
+  #topnav .navlinks{display:flex;gap:1.1rem;flex-wrap:wrap;justify-content:flex-end;}
+  @media (max-width:600px){#topnav{font-size:.68rem;padding:.5rem .8rem;} #topnav .navlinks{gap:.7rem;}}
+  .tierlab{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7;display:inline-flex;align-items:center;gap:.35rem;}
+  .card-body{display:none;padding:0 1.15rem 1.15rem;border-top:1px solid rgba(62,242,209,.1);}
+  .card.open .card-body{display:block;}
+  .card.open .chev{transform:rotate(180deg);}
+  .chev{transition:transform .2s;opacity:.4;font-size:.9rem;}
+  .cb-lab{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--biolum);opacity:.7;margin:.9rem 0 .3rem;}
+  .cb-txt{font-size:.82rem;color:rgba(234,244,248,.8);}
+  .cb-links{margin-top:.5rem;display:flex;flex-wrap:wrap;gap:.4rem;}
+  .cb-links a{font-family:'JetBrains Mono',monospace;font-size:.68rem;border:1px solid rgba(62,242,209,.25);border-radius:5px;padding:.2rem .5rem;border-bottom:1px solid rgba(62,242,209,.25);}
+  #four{background:rgba(3,15,28,.55);}
+  .shortfall{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--jelly);background:rgba(255,93,177,.1);border:1px solid rgba(255,93,177,.25);border-radius:5px;padding:.3rem .7rem;margin:.4rem 0 1.6rem;}
+  .four-card{background:rgba(14,63,99,.4);border:1px solid rgba(62,242,209,.12);border-radius:10px;margin-bottom:.8rem;overflow:hidden;}
+  .four-face{padding:1.1rem 1.2rem;cursor:pointer;user-select:none;}
+  .four-face h4{font-family:'Space Grotesk';font-size:1rem;margin-bottom:.35rem;}
+  .four-comp{font-size:.85rem;color:rgba(234,244,248,.72);font-style:italic;}
+  .stamp{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.06em;color:var(--lantern);background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.22);border-radius:3px;padding:.16rem .45rem;display:inline-block;margin-top:.6rem;}
+  .four-body{display:none;padding:0 1.2rem 1.2rem;font-size:.83rem;color:rgba(234,244,248,.8);}
+  .four-card.open .four-body{display:block;}
+  #data{background:rgba(7,36,59,.3);}
+  .legend{display:flex;gap:1.3rem;flex-wrap:wrap;margin:1.2rem 0 1.6rem;font-family:'JetBrains Mono',monospace;font-size:.74rem;}
+  .legend span{display:inline-flex;align-items:center;gap:.4rem;}
+  .chips{display:flex;flex-wrap:wrap;gap:.5rem;}
+  .chip{display:inline-flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;border-radius:5px;padding:.34rem .7rem;border:1px solid;border-bottom-width:1px;}
+  .chip.o{background:rgba(62,242,209,.08);border-color:rgba(62,242,209,.3);color:var(--biolum);}
+  .chip.reg{background:rgba(255,209,102,.08);border-color:rgba(255,209,102,.3);color:var(--lantern);}
+  .chip.app{background:rgba(255,93,177,.08);border-color:rgba(255,93,177,.28);color:var(--jelly);}
+  footer{background:var(--abyss);border-top:1px solid rgba(62,242,209,.1);padding:clamp(3rem,6vw,5rem) 0 4rem;}
+  .honesty{background:rgba(255,93,177,.06);border:1px solid rgba(255,93,177,.2);border-radius:8px;padding:1.1rem 1.3rem;font-size:.85rem;color:rgba(234,244,248,.78);max-width:74ch;margin-bottom:1.2rem;}
+  .honesty strong{color:var(--jelly);}
+  .queue{background:rgba(62,242,209,.05);border:1px solid rgba(62,242,209,.15);border-radius:8px;padding:1.1rem 1.3rem;font-size:.85rem;color:rgba(234,244,248,.78);max-width:74ch;}
+  .queue strong{color:var(--biolum);}
+  .byline{margin-top:2.4rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;opacity:.35;}
+  .creature{position:fixed;z-index:5;pointer-events:auto;opacity:.5;will-change:transform;}
+  .creature svg{display:block;filter:drop-shadow(0 0 6px rgba(62,242,209,.5));}
+  .cfact{position:fixed;z-index:6;font-family:'JetBrains Mono',monospace;font-size:.7rem;background:rgba(3,15,28,.92);color:var(--biolum);border:1px solid rgba(62,242,209,.3);border-radius:6px;padding:.4rem .6rem;max-width:230px;pointer-events:none;opacity:0;transition:opacity .2s;}
+  #sonarLayer{position:fixed;inset:0;z-index:4;pointer-events:none;}
+  .ping{position:absolute;border:2px solid var(--biolum);border-radius:50%;transform:translate(-50%,-50%);animation:ping 1s ease-out forwards;}
+  @keyframes ping{from{width:8px;height:8px;opacity:.7}to{width:340px;height:340px;opacity:0}}
+  #headlamp{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:0;transition:opacity .4s;
+     background:radial-gradient(circle 338px at var(--mx) var(--my),transparent 0%,transparent 46%,rgba(3,10,20,.72) 100%);}
+  body.deepzone #headlamp{opacity:1;}
+  .toast{position:fixed;left:50%;top:26px;transform:translateX(-50%);z-index:20;font-family:'JetBrains Mono',monospace;font-size:.78rem;
+     background:rgba(3,15,28,.95);color:var(--lantern);border:1px solid rgba(255,209,102,.4);border-radius:999px;padding:.5rem 1rem;opacity:0;transition:opacity .25s;pointer-events:none;}
+  .toast.show{opacity:1;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+    #headlamp{display:none;} .creature{position:absolute;}
+  }
+</style>
+</head>
+<body>
+<nav id="topnav">
+  <a class="brand" href="index.html">&#8776; Hidden Tide</a>
+  <div class="navlinks">
+    <a href="index.html#newly">the 42</a>
+    <a href="index.html#zero">Category Zero</a>
+    <a href="roster.html">the roster</a>
+    <a href="method.html">the manual</a>
+  </div>
+</nav>
+<div id="depthbg"></div><div id="grain"></div>
+<div id="headlamp"></div>
+<div id="sonarLayer"></div>
+<div class="cfact" id="cfact"></div>
+<div class="toast" id="toast"></div>
+
+<section id="hero"><div class="wrap">
+  <div class="eyebrow">The Hitchhiker's Guide to the Ocean's Hidden Data · assembled by AI, collaborative, from free data only</div>
+  <div class="dontpanic">DON'T PANIC<small>the ocean has been keeping notes. we just learned to read them.</small></div>
+  <h1>What is the ocean hiding in plain sight across data we've already collected but never combined?</h1>
+  <p id="bootline" class="mono"></p>
+  <a class="divecue" href="#newly">dive in <span>&#9662;</span></a>
+</div></section>
+
+<section id="bigidea"><div class="wrap">
+  <div class="sec-label">Entry 000 &middot; The Big Idea</div>
+  <h2 class="sec-title">Every dataset is a lossy shadow of the same ocean</h2>
+  <p class="sec-intro">We built a separate instrument, and a separate department, for each shadow. Not because the ocean comes in pieces, but because no one mind could hold them all at once. That is a limit of human memory, not a fact about the sea. An AI has no such limit.</p>
+  <div class="inversion">
+    <div class="inv-row old"><span class="inv-tag">the old way</span><span class="inv-flow">question &rarr; data &rarr; answer</span><span class="inv-note">you must know what to ask first</span></div>
+    <div class="inv-row new"><span class="inv-tag">our way</span><span class="inv-flow">data &rarr; structure &rarr; question</span><span class="inv-note">the structure tells you what to ask</span></div>
+  </div>
+  <p class="sec-intro">Fuse every signal, learn how the whole thing normally hangs together, and let the cracks and the hidden couplings hand you the questions. The 42 below are what that looks like when an AI still drafts you a hypothesis to chase. Go deeper, and you reach the version where nothing is drafted at all.</p>
+  <p class="sec-intro" style="margin-top:1.8rem"><strong style="color:var(--biolum)">Two ways down from here.</strong></p>
+  <div class="grid" style="margin-top:.9rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+    <a href="#newly" style="border-bottom:none"><div class="card"><div class="card-face"><div class="card-top"><span class="card-n">A</span><span class="card-title">Browse the 42</span></div><div class="card-wow">AI-drafted hypotheses, already pulled from the data. Filter them by how testable they are, plant a flag on one, or let the Improbability Drive throw you at one at random. Start here for the fun.</div></div></div></a>
+    <a href="#zero" style="border-bottom:none"><div class="card"><div class="card-face"><div class="card-top"><span class="card-n">B</span><span class="card-title">Go to Category Zero</span></div><div class="card-wow">The deep end: stop seeding ideas at all, and let the machine find what nobody ever thought to look for. Further down, in the dark.</div></div></div></a>
+  </div>
+</div></section>
+
+<section id="newly"><div class="wrap">
+  <div class="sec-label">Entry 001 &middot; The Newly Possible</div>
+  <h2 class="sec-title">42 things that only became findable now</h2>
+  <p class="sec-intro">Because an AI can read what was unreadable, pull apart what was mush, and hold every layer at once. This is the full brainstorming map, uncut. The only bars each idea cleared: it's falsifiable, and it could leave a trace in data that <em>already exists</em>. Wonder first. These are candidates, not results.</p>
+  <div class="controls">
+    <button class="drive" id="drive">&#9889; Improbability Drive</button>
+    <div class="filters" id="filters">
+      <button class="fbtn" data-f="all" aria-pressed="true">All</button>
+      <button class="fbtn" data-f="g" aria-pressed="false"><i class="dot g"></i>weekend-testable</button>
+      <button class="fbtn" data-f="y" aria-pressed="false"><i class="dot y"></i>probable</button>
+      <button class="fbtn" data-f="r" aria-pressed="false"><i class="dot r"></i>moonshot</button>
+    </div>
+    <span class="counter" id="counter"></span>
+  </div>
+  <div id="map"></div>
+  <p class="sec-intro" style="margin-top:2.2rem">See one with your name on it? <a href="roster.html">Plant your flag on the expedition roster &#8599;</a> It is an open dive: pick any idea, claim it, and start digging.</p>
+</div></section>
+
+<section id="four"><div class="wrap">
+  <div class="sec-label">Entry 002 &middot; The Buildable Four</div>
+  <h2 class="sec-title">And four you could start this week</h2>
+  <p class="sec-intro">The rigorous pass, run for real, passed only four candidates through the full novelty + availability gate. It refused to pad to ten. All four are honest, cited, and grounded in open data.</p>
+  <div class="shortfall mono">4 of 10 slots filled - an honest shortfall, not padding</div>
+  <div id="fourwrap"></div>
+</div></section>
+
+<section id="zero" style="background:rgba(2,10,20,.74)"><div class="wrap">
+  <div class="sec-label" style="color:var(--jelly)">Entry 000.0 &middot; Category Zero</div>
+  <h2 class="sec-title">The part where we stop asking questions</h2>
+  <p class="sec-intro">Every idea above, even the wildest, is still a hypothesis: something framed a question in advance. An AI drafted them from the data, but it still had to choose what to look at. Category Zero is where nothing is chosen up front. You pour every layer into one model, let it learn the joint structure of the whole ocean, and let the structure nominate the questions. No hypothesis goes in the front door, from anyone. This is the real thing the project is about; the 42 are just what happens when we let the machine sketch the questions first.</p>
+  <p class="sec-intro" style="margin-top:1rem">Structure can surprise you in three ways, and a machine can hunt all three at once, tirelessly, across far more variables than any person can hold in mind:</p>
+  <div class="grid" style="margin-top:1.4rem">
+    <div class="card"><div class="card-face" style="cursor:default"><div class="card-top"><span class="card-n">01</span><span class="card-title">Anomalies</span></div><div class="card-wow">Where the structure breaks. A break in one channel is usually a broken sensor. A break in several channels at once, that the rest of the ocean cannot explain, is a candidate for something new.</div></div></div>
+    <div class="card"><div class="card-face" style="cursor:default"><div class="card-top"><span class="card-n">02</span><span class="card-title">Couplings</span></div><div class="card-wow">Relationships nobody wrote down. A strong, repeatable link between two channels that no textbook pairs, and that still holds on data the model never saw, is a discovery on its own, and often a sturdier one than an anomaly.</div></div></div>
+    <div class="card"><div class="card-face" style="cursor:default"><div class="card-top"><span class="card-n">03</span><span class="card-title">Regimes</span></div><div class="card-wow">Moods the ocean has, and nobody named. Cluster the fused state through time; a regime that appears and vanishes on a calendar no one predicted, or a boundary that quietly moved, is structure hiding in plain sight.</div></div></div>
+  </div>
+  <div class="shortfall mono" style="margin-top:1.8rem;color:var(--biolum);background:rgba(62,242,209,.08);border-color:rgba(62,242,209,.28);display:block;max-width:76ch;line-height:1.6">The one rule that keeps this honest: find it on one slice, freeze it, and it only counts if it survives on a slice the model never saw, and then survives an agent actively trying to kill it. Without that, a machine trawling for correlations finds a million of them, and every single one is a ghost.</div>
+  <h3 style="margin:2.6rem 0 1.1rem;color:var(--lantern);font-size:1.2rem">Eight ways to point the machine at the ocean</h3>
+  <div class="grid">
+    <div class="card"><div class="card-face" style="cursor:default"><div class="card-top"><span class="card-n">Z1</span><span class="card-title">The Whole Cabled Coast, Fused</span></div><div class="card-wow">Pour the entire open Monterey and Oregon stack (hydrophones, seafloor fiber, floats, moorings, satellites, ship traffic) into one self-supervised model, and rank the couplings it finds by how much they surprise a shuffled, discipline-blind null.</div><div class="card-meta"><span class="rating">"the maximalist option: throw it all in and see what flinches"</span><span class="tierlab">surface: couplings + regimes</span></div></div></div>
+    <div class="card"><div class="card-face" style="cursor:default"><div class="card-top"><span class="card-n">Z2</span><span class="card-title">The Reconstruction Map</span></div><div class="card-wow">Train the model to rebuild the whole fused state from itself; the reconstruction error is the discovery map. Only multi-channel breaks that also survive on a held-out season are allowed to count.</div><div class="card-meta"><span class="rating">"one broken channel is a broken sensor; many at once is a rumor worth chasing"</span><span class="tierlab">surface: anomalies</span></div></div></div>
+    <div class="card"><div class="card-face" style="cursor:default"><div class="card-top"><span class="card-n">Z3</span><span class="card-title">The Equation Nobody Wrote</span></div><div class="card-wow">Run symbolic regression over the aligned channels and ask for the shortest expression that predicts one from the rest. A compact, accurate law that appears in no textbook is the find.</div><div class="card-meta"><span class="rating">"if the ocean is running a simple rule, make it confess the formula"</span><span class="tierlab">surface: couplings</span></div></div></div>
+    <div class="card"><div class="card-face" style="cursor:default"><div class="card-top"><span class="card-n">Z4</span><span class="card-title">Who Drives Whom</span></div><div class="card-wow">Run causal discovery over the multivariate time series and infer the directed graph of which signal leads which, with no prior. An arrow nobody has drawn is a candidate.</div><div class="card-meta"><span class="rating">"correlation's grown-up cousin. it points."</span><span class="tierlab">surface: couplings</span></div></div></div>
+    <div class="card"><div class="card-face" style="cursor:default"><div class="card-top"><span class="card-n">Z5</span><span class="card-title">The Odd One Out</span></div><div class="card-wow">Contrastive novelty search across the whole archive, surfacing not an odd number in one variable but a whole ocean state that has never been seen before.</div><div class="card-meta"><span class="rating">"not a weird number. a weird day."</span><span class="tierlab">surface: anomalies + regimes</span></div></div></div>
+    <div class="card"><div class="card-face" style="cursor:default"><div class="card-top"><span class="card-n">Z6</span><span class="card-title">All Pairs, No Priors</span></div><div class="card-wow">An information-theoretic dependency scan across every variable pair, including the cross-modal ones no field bothers to compare, ranking strong dependencies of any shape.</div><div class="card-meta"><span class="rating">"the brute-force stare: every pair, no shame"</span><span class="tierlab">surface: couplings</span></div></div></div>
+    <div class="card"><div class="card-face" style="cursor:default"><div class="card-top"><span class="card-n">Z7</span><span class="card-title">The Regime Atlas</span></div><div class="card-wow">Unsupervised clustering of the fused state through time, mapping the ocean's moods. A regime on an unexpected calendar, or a boundary that moved, is structure hiding in plain sight.</div><div class="card-meta"><span class="rating">"the ocean has moods. draw the map of them."</span><span class="tierlab">surface: regimes</span></div></div></div>
+    <div class="card"><div class="card-face" style="cursor:default"><div class="card-top"><span class="card-n">Z8</span><span class="card-title">The Cross-Modal Rosetta</span></div><div class="card-wow">Train the model to translate one modality into another (say, sound into temperature). Where it translates unexpectedly well, two fields secretly share structure; where it fails, something is missing.</div><div class="card-meta"><span class="rating">"when whalesong predicts the thermocline, someone owes the whales an author credit"</span><span class="tierlab">surface: couplings</span></div></div></div>
+  </div>
+  <p class="sec-intro" style="margin-top:1.6rem">Want the machinery under the hood: the named methods, the real papers, and exactly how the confirmation gate works? <a href="method.html">The manual is in the glovebox &#8599;</a></p>
+</div></section>
+
+<section id="data"><div class="wrap">
+  <div class="sec-label">Entry 003 &middot; Where To Look</div>
+  <h2 class="sec-title">The free-data estate</h2>
+  <p class="sec-intro">A large chunk of the ocean's data is open, no login. Click a chip to go to its real access page. Colour = how hard it is to get in.</p>
+  <div class="legend">
+    <span><i class="dot g"></i>OPEN - no login</span><span><i class="dot y"></i>free registration</span><span><i class="dot r"></i>approval / reciprocal</span>
+  </div>
+  <div class="chips" id="chips"></div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="honesty">
+    <strong>The honest small print.</strong> Every dataset check here is <strong>AVAILABILITY-VERIFIED, NOT DATA-VERIFIED</strong> - access pages were confirmed to resolve and be free, but not one byte was pulled (no credentials, by design). The "Newly Possible" map is the <strong>wide divergent pass</strong>: wonder-first, and <strong>not novelty-filtered</strong>. These are candidates, not results - some may be partly done, some may die on signal-to-noise. The tier dots mean exactly what they say; a moonshot is never dressed up as probable, even in jest.
+  </div>
+  <div class="queue">
+    <strong>The weekend-testable ones need zero accounts.</strong> Shrimp thermometry, the rain gauge, lighthouse logs, the 1929 cable-fault catalog, tide-clerk registers, fleet-beats-the-satellite, the fish-spawning seismic calendar, and the microseism ice-edge. The rest are in the morning queue: make ~6 free accounts, run the one-hour smoke tests, and do a preprint sweep before claiming any of this is new.
+  </div>
+  <div style="margin-top:2rem;font-family:'JetBrains Mono',monospace;font-size:.82rem;display:flex;gap:1.6rem;flex-wrap:wrap">
+    <a href="roster.html">&#9873; The expedition roster: who is diving on what</a>
+    <a href="method.html">&#9881; The manual: how the engine works</a>
+  </div>
+  <div class="byline">Sources: NASA &middot; NOAA &middot; Copernicus &middot; EarthScope/IRIS &middot; Zenodo &middot; MEOP &middot; MBARI &middot; OBIS &amp; more - every claim traces to the research log. Built as a demo. Nothing here was sent, deployed, or downloaded. &middot; Hidden Tide &middot; hiddentide.com</div>
+</div></footer>
+
+<script>
+const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+const BOOTLINES=[
+ "> the ocean is 71% of the planet and roughly 100% under-analyzed. loading...",
+ "> forty-two ideas nobody funded, all findable in data that already exists. mostly harmless.",
+ "> the whales, the shrimp, the fishing fleets and a lot of dusty paper have been taking measurements. nobody read them.",
+ "> a microscope, not a prophecy. we don't know what's under it until we look.",
+ "> AI can now hold every ocean dataset at once. the ocean finds this mildly alarming.",
+ "> warning: contains at least one idea about cosmic rays and plankton. we kept it on purpose."
+];
+document.getElementById('bootline').textContent = pick(BOOTLINES);
+
+const CH=[
+ {n:'I',t:'The Time Machine',s:"AI can now read handwriting, ledgers, log-books and analog charts at scale. Rooms of 'dead' paper are the highest-resolution record of the pre-industrial ocean, and almost none of it is digitized."},
+ {n:'II',t:'The Eavesdropper',s:"The ocean is drowning in sound and strain. AI can finally pull the overlapping voices apart and read the second and third messages inside each one."},
+ {n:'III',t:'The Xenobiologist',s:"A migration is a measurement. A panic is a readout. Animals and fleets are sensors, sometimes computers, made of meat and diesel."},
+ {n:'IV',t:'The Structure-Seer',s:"Things that should not talk to each other, but apparently do. Couplings across scales and domains that only make sense when one model holds every layer at once."}
+];
+const L={
+ nrs:['NOAA passive acoustic','https://www.ncei.noaa.gov/products/passive-acoustic-data'],
+ es:['EarthScope FDSN','https://service.earthscope.org/fdsnws/dataselect/1/'],
+ mbari:['MBARI Pacific Sound','https://registry.opendata.aws/pacific-sound/'],
+ das4w:['DAS4Whale (Zenodo)','https://zenodo.org/records/5823343'],
+ dasfin:['fin-whale DAS (Zenodo)','https://zenodo.org/records/15008561'],
+ dastr:['Trondheim DAS (Zenodo)','https://zenodo.org/records/18851481'],
+ dasuc:['UK-Canada DAS (Zenodo)','https://zenodo.org/records/6405431'],
+ watkins:['Watkins sounds','https://archive.org/details/watkins-marine-mammal-sound-database-full-cuts'],
+ move:['Movebank','https://www.movebank.org/cms/movebank-content/movebank-api'],
+ ais:['Marine Cadastre AIS','https://coast.noaa.gov/htdata/CMSP/AISDataHandler/2024/index.html'],
+ gebco:['GEBCO','https://download.gebco.net/'],
+ grace:['GRACE-FO mascons','https://podaac.jpl.nasa.gov/dataset/TELLUS_GRAC-GRFO_MASCON_CRI_GRID_RL06.3_V4'],
+ wwlln:['WWLLN lightning','https://www.earthdata.nasa.gov/data/catalog/ghrc-daac-wwllnmth-1'],
+ vnl:['VIIRS night lights','https://eogdata.mines.edu/products/vnl/'],
+ hycom:['HYCOM','https://www.hycom.org/dataserver/gofs-3pt0/reanalysis'],
+ glorys:['GLORYS12','https://data.marine.copernicus.eu/product/GLOBAL_MULTIYEAR_PHY_001_030/services'],
+ rapid:['RAPID AMOC','https://rapid.ac.uk/'],
+ coral:['NCEI paleo coral','https://www.ncei.noaa.gov/products/paleoclimatology'],
+ ibtracs:['IBTrACS cyclones','https://www.ncei.noaa.gov/products/international-best-track-archive'],
+ psmsl:['PSMSL sea level','https://psmsl.org/data/obtaining/'],
+ wod:['World Ocean Database','https://www.ncei.noaa.gov/products/world-ocean-atlas'],
+ obis:['OBIS','https://obis.org/'],
+ ram:['RAM Legacy','https://ramlegacy.org/'],
+ fao:['FAO FishStat','https://www.fao.org/fishery/en/fishstat'],
+ ndbc:['NDBC buoys','https://www.ndbc.noaa.gov/'],
+ argo:['Argo (ERDDAP)','https://erddap.ifremer.fr/erddap/tabledap/ArgoFloats.html'],
+ ncbi:['NCBI SRA','https://www.ncbi.nlm.nih.gov/sra/']
+};
+const I=[
+ [1,0,'g',"The Lighthouse Keeper's 200-Year Weather Diary","Keepers logged wind, sea and sky every few hours from the same rock for 80 years - the longest stable ocean-observer network in history, sitting un-OCR'd.","Obviously correct, and the Guide is slightly annoyed nobody's done it.","Trinity House / Norwegian Fyr / Canadian lighthouse logs, cross-checked against PSMSL sea level and EarthScope microseism.","Read Eddystone 1900-1910 Beaufort estimates; correlate against nearby PSMSL and 0.1-0.35 Hz microseism power.",['psmsl','es']],
+ [2,0,'g',"The Cable That Logged Every Tsunami Since 1866","Subsea cables snap in quakes, turbidity currents and tsunamis - and repair ships billed by the day, so every break was timed to the minute. An accidental 150-year event catalog.","The 1929 repair bill probably still exists. Go and read it.","Eastern Telegraph / AT&amp;T / ITU fault logs, matched against USGS + NOAA quake and tsunami catalogs and EarthScope.","Pull the 1929 Grand Banks fault reports (likely never cross-checked since 1952); unmatched breaks are new candidates.",['es']],
+ [3,0,'y',"The Fish-Auction Oracle","Daily fish-market ledgers 1880-1970 are the highest-resolution survey ever taken of the pre-industrial ocean - and nobody has digitized them.","Mostly Harmless but Potentially Upsetting to Several National Fishing Industries.","Gloucester dealer ledgers (Internet Archive), Norwegian &amp; Basque records, against FAO FishStat / RAM / OBIS.","Vision-read 200 pages; does the 1895-1920 haddock catch-per-effort curve show the collapse later reconstructions only infer?",['fao','ram','obis']],
+ [4,0,'y',"Museum Ear-Stones Read the Whole Food Web","Millions of dated fish otoliths sit in museum drawers - each a tree-ring diary of every water mass the fish swam through. AI triages which to isotope-date.","Devastating to the idea that we already know what the old ocean looked like.","Smithsonian / NHM / CSIRO collections, against OBIS and the World Ocean Database.","Score 500 cod-otolith images 1880-1920; do the best show lower Mg/Ca (cooler bottom water) than post-1950?",['obis','wod']],
+ [5,0,'y',"The Guano Ledger: a 100-Year ENSO Index in Seabird Droppings","Guano tonnage tracks seabirds tracks anchovy tracks upwelling. Company books are an accidental century-long El Nino record.","The Guide smells something. It is probably the archive. This is a good sign.","Guano-company reports and UK Board of Trade cargo returns, against a Nino3.4 index and RAM anchoveta.","Extract Peru-to-UK guano volumes 1870-1900; plot against the historical ENSO catalogue. Low guano in El Nino years validates it.",['ram']],
+ [6,0,'y',"The Colonial Tax Assessor's Mangrove Census","19th-C timber-tax surveys mapped coastal vegetation in detail nobody meant as ocean data - a baseline for coastal carbon and nursery habitat.","Improbable only to people who have not visited the British Library reading room.","British India / Netherlands East Indies / Indochina cadastral maps, against Global Mangrove Watch and OBIS.","Georeference 1870-1910 Sundarbans mangrove polygons against 1996 satellite extent; quantify loss.",['obis']],
+ [7,0,'r',"The Whaling Captain's Ice-Margin, Drawn in Ink","Captains hand-annotated ice limits (hitting ice sank a fortune). Filed with underwriters, they're a 150-year hand-drawn satellite image of polar ice.","The hard part is the archive, not the science. Plan accordingly.","Lloyd's records / UK Hydrographic Office / New Bedford logs, against HadISST1 (sparse pre-1950, so any point is publishable).","Extract ice latitudes from 50 Southern Ocean logs 1880-1910; compare to HadISST1.",[]],
+ [8,0,'g',"The Tide-Clerk's Pencil and the Missing Storm","Harbor clerks wrote water levels by hand every tidal cycle from ~1750 - a century before automatic gauges.","Distressingly practical. The Guide wonders why it took until 2026.","Mersey Dock registers 1767-1900 / Dutch Rijkswaterstaat / Charleston custom-house, against PSMSL and ERA5.","Harmonically analyze the digitized Liverpool 1780-1800 gap; recover two decades of Atlantic storm surge.",['psmsl']],
+ [9,0,'y',"The Radio-Operator's Sea-State Notebook","Merchant-ship radio operators filed mandatory weather in a different archive stream than deck logs - covering the mid-ocean gyres the standard record misses.","Someone at ICOADS has been meaning to do this since 1987. They are still meaning to.","Dutch / Hamburg / Gdynia maritime museums, against ICOADS and ERA5.","Extract BBXX synoptic codes from 1935-40 pages; do they fill documented South-Atlantic coverage gaps?",[]],
+ [10,0,'r',"Legacy Seafloor Photos + DNA = an Inadvertent Deep-Sea Census","Decades of nodule/crust photography cross-registered with archived DNA amplicon surveys reconstruct a deep-sea biofilm census nobody assembled.","The most radical entry. Also mostly blocked. The Guide respects the attempt.","IODP legacy imagery against NCBI SRA 16S amplicon surveys.","Co-register cm-scale legacy photos with amplicon sample sites. (Blocked on photo precision + contractor archives.)",['ncbi']],
+
+ [11,1,'g',"The Shrimp Are Doing Your Oceanography for Free","Snapping shrimp snap at a temperature-dependent rate. Every soundscape archive is therefore a thermometer that runs on plankton.","The shrimp are doing your oceanography for free and nobody asked.","NOAA NRS + SanctSound soundscapes, against NDBC buoys (all open).","At Stellwagen, regress 2-15 kHz snap-band power against NDBC water temperature 2015-2022. r&gt;0.6 and the shrimp are a thermometer.",['nrs','ndbc']],
+ [12,1,'g',"The Hydrophone That Corrects the Rain Satellite","Rain on the sea rings at 14-16 kHz. The always-on hydrophone catches the rain that fell between satellite overpasses.","It rains in the ocean. Finally someone is listening.","NOAA NRS, NDBC rain buoys, GPM satellite rainfall, and AIS (to flag ships).","At Stellwagen during 2015-2020 storms, does hourly 14-16 kHz power track NDBC rainfall at r&gt;0.8?",['nrs','ndbc']],
+ [13,1,'r',"Whales as a Free Global Thermometer","Sound speed depends on temperature - so the same whale call reaching two distant hydrophones at slightly different times maps the water temperature between them. Whales as the free transmitter.","Mostly harmless and astonishing.","EarthScope OBS + OOI + NRS + fin-whale DAS, against a HYCOM baseline.","One call on both Crozet and OOI Oregon; measure lag vs HYCOM prediction; residual &gt;0.5 s over 100 calls, correlated with Argo anomalies?",['es','dasfin','hycom']],
+ [14,1,'r',"Cracking the 20-Year Blue-Whale Mystery","Blue-whale song has dropped in pitch worldwide since ~1960 - documented, unexplained. Untested idea: they're tuning to the SOFAR sound-channel as ocean density shifts.","Don't panic. It might just be the ocean telling us something.","Watkins archive (1940s-2000s), MBARI and OOI, against GLORYS12 sound-channel structure.","Does per-basin pitch-drop rate track per-basin SOFAR-axis shoaling in GLORYS12?",['watkins','mbari','glorys']],
+ [15,1,'y',"The Seafloor Fiber That Weighs Invisible Ships","A ship crossing a subsea cable leaves a strain 'chirp' encoding hull draught and loaded weight - a weigh-station on the seabed that works on AIS-dark ships.","This is clearly someone else's problem, and yet.","Trondheim fjord DAS and Marine Cadastre AIS, against Lloyd's load-line data.","20 known-IMO crossings: does chirp-derived draught correlate with Lloyd's load line at r&gt;0.7?",['dastr','ais']],
+ [16,1,'y',"The Whale Songs Contain the Ocean's Social Network","Humpback song motifs spread across whole basins in 2-3 years. Sixty years of recordings as a network reconstruct population connectivity and splits - from sound alone.","The whale songs contain the ocean's social network. Nobody has read it.","Watkins DB, MBARI Pacific Sound and OOI.","Cluster North-Pacific humpback phonemes 1960-1995; does the network fragment in the post-whaling 1970s and re-converge in the 1990s?",['watkins','mbari']],
+ [17,1,'y',"Every Earthquake Is a Free Sonar Ping of the Seafloor","A seafloor quake's sound-channel arrival has timing set by local bathymetry - so each one tests where GEBCO is wrong by hundreds of metres.","You have located your fish. It is under the wrong part of the map.","EarthScope FDSN and OOI hydrophone, against GEBCO and an earthquake catalog.","Histogram T-phase arrival residuals at OOI Oregon 2016-2020 vs GEBCO; systematic offsets by azimuth = a bathymetric error.",['es','gebco']],
+ [18,1,'y',"The Cable Knew: DAS as a Continuous Internal-Wave Map","Internal tides heave the water column and strain the fiber below. The transoceanic DAS set already records it - uninverted.","The cable knew. The cable has always known.","UK-Canada transoceanic DAS, against HYCOM and Argo.","Strain power spectrum at the M2 tidal frequency; does phase propagation along the cable match HYCOM's baroclinic tide?",['dasuc','hycom','argo']],
+ [19,1,'r',"Seismic Polarization as a Deep Boundary-Current Monitor","The polarization angle of ocean-driven seismic hum encodes where swell interacts; its long-term drift may track the deep Western Boundary Current.","Mostly impossible. But the seismograph has been recording it anyway since 2000.","EarthScope 3-component stations, ERA5 wave spectra and altimetry.","Daily microseism azimuth at Harvard (HRV) 2005-2020 vs the AMOC-slowdown signal.",['es']],
+
+ [20,2,'r',"Sea Turtles as a Crowd-Sourced Map of Earth's Buried Magnetism","Loggerheads navigate by magnetic field. Their deviations from the straight route home, once currents are subtracted, are reports of crustal magnetic anomalies below.","The turtles have been mapping the planet's magnetism. They filed no report.","Movebank loggerhead tracks, HYCOM currents and the EMAG2 crustal magnetic map.","Over a strong known anomaly, does drift-corrected heading residual track the anomaly gradient?",['move','hycom']],
+ [21,2,'g',"The Fishing Fleet Finds the Bloom Before the Satellite","Fleet lights and movement shift toward productive water 3-5 days before the satellite sees the chlorophyll. The fleet centroid drift is the bloom's advection vector.","42,000 boats do ocean science every night. We should probably read their data.","VIIRS boat-detection and AIS, against satellite chlorophyll and SST.","East China Sea 2020-2024: does fleet-centroid drift lead satellite chlorophyll by 3-5 days? One Python session.",['vnl','ais']],
+ [22,2,'r',"Anchored Fishing Fleets as an Accidental Tsunami-Warning Network","Anchored vessels bob to infragravity and sound-channel arrivals - maybe before sparse DART buoys. Coherent jitter rippling through an AIS cluster at ~1.5 km/s is traveling in the sound channel.","Either a warning system nobody built, or a very large coincidence.","Marine Cadastre AIS and EarthScope seismic; Tohoku 2011 as the validation event.","Around Tohoku 2011, does coherent AIS jitter propagate across the fleet at sound-channel speed ahead of the wave?",['ais','es']],
+ [23,2,'r',"Bioluminescence as a Distributed Predator Stopwatch","A chased sardine shoal lights up. Satellite night-flashes over open water (minus squid boats and moonglint) record predator position and chase geometry.","The ocean flashes when something dies. We could be keeping score.","VIIRS Day/Night Band and MBARI Pacific Sound (Monterey).","Do night-band transient flashes co-occur with MBARI predator-burst acoustics above chance?",['vnl','mbari']],
+ [24,2,'r',"Sperm Whales as Autonomous Deep-Sonar","A sperm whale's click inter-pulse-interval encodes prey density at depth - so biologged whales become roaming sonar for the deep-scattering layer.","The whale is the instrument. It did not consent, but it is very good at it.","Movebank sperm-whale tracks and MBARI raw audio, against a HYCOM deep-scattering-layer proxy.","Do click inter-pulse-interval values from MBARI audio co-vary with a deep-scattering-layer proxy at the same place and time?",['move','mbari','hycom']],
+ [25,2,'y',"The DAS Cable as a Whale Stress Polygraph","A 600 km fiber records every baleen call crossing a corridor. Call inter-event-interval sequences encode behavioral state - and ship noise should spike the variance.","The fiber is listening to the whales' anxiety.","DAS4Whale and labeled fin-whale Zenodo sets, against AIS ship-noise events.","Do AIS ship passages produce measurable call-interval-variance spikes in the DAS record?",['das4w','dasfin','ais']],
+ [26,2,'y',"Dark Ships Write Plankton Blooms","Vessels go AIS-dark over the best grounds, so the shape and drift of dark patches is a productivity map no science program paid for - possibly leading chlorophyll by weeks.","Poaching as passive ocean observation. The irony is too rich to resist.","Marine Cadastre AIS gaps, satellite chlorophyll and GLORYS12 mixed-layer depth. Sibling to the vetted Four.","Do dark-patch density anomalies lead chlorophyll by 2-6 weeks in upwelling zones, confirmed on held-out years?",['ais','glorys']],
+ [27,2,'y',"Seabird Detour Index as a Subsurface Front Detector","Kinks in albatross tracks locate subsurface thermal fronts at sub-10-km resolution - better than satellite SST - because birds chase prey driven by physics they can't see.","The albatross knows where the front is. It won't tell you directly.","Movebank albatross studies, SWOT sea-surface height and GLORYS12.","Invert track-sinuosity spikes into front positions; validate against Argo 200 m temperature gradients.",['move','glorys']],
+
+ [28,3,'r',"A Microphone on the Atlantic's Jugular","DAS on transatlantic fiber records bottom-pressure strain proportional to the geostrophic flow above. The cables may already be measuring AMOC transport every minute.","We put a microphone on the Atlantic's jugular and used it to listen for whales.","UK-Canada transoceanic DAS, GRACE-FO bottom pressure, the RAPID 26N array and HYCOM.","Correlate sub-daily DAS strain against RAPID transport; kill it if no coherence survives tidal-strain removal.",['dasuc','grace','rapid']],
+ [29,3,'g',"The Solid Earth Keeps a Fish-Spawning Calendar","Millions of spawning fish chorus loudly enough to show up as seasonal 'biological tremor' in land seismometers, hidden inside 30 years of archives.","Mostly proven for one very loud fish. The universe suspects there are more.","EarthScope FDSN and MBARI Pacific Sound, against RAM spawning biomass and OBIS.","Gulf corvina (Sea of Cortez) is one of the loudest choruses on Earth - does a biological seismic signal track the spawn calendar? Confirm on Oregon hake.",['es','mbari','ram']],
+ [30,3,'y',"The Lightning Network Watches the Tuna","Tropical-Pacific lightning tracks warm-pool boundaries so tightly it may predict yellowfin tuna better than SST - integrating thermocline and instability SST misses.","Zero fishermen consult lightning data. This is either brilliant or a Pacific-sized coincidence.","WWLLN lightning, tropical moorings and ocean reanalysis, against RAM tuna stocks.","Train on 2000-2010, predict 2010-2024 catch-per-effort out-of-sample; does lightning + thermocline beat SST-only in La Nina years?",['wwlln','ram']],
+ [31,3,'r',"Gravity Slumps When the Kelp Dies","Kelp forests are dense enough that a multi-year die-off may change the mass column GRACE-FO weighs from orbit - under noise nobody subtracted.","Kelp probably can't move a satellite. Probably.","GRACE-FO mascons, HYCOM bottom pressure, tide gauges and satellite kelp area.","Is there a coherent negative GRACE anomaly at the N-California coast during the 2014-16 kelp die-off, reversing after 2018? (300 km resolution is the kill-risk.)",['grace','hycom']],
+ [32,3,'r',"An Antarctic Storm, an Arctic Bad Week, Three Years Apart","Southern-Hemisphere storm hum, then bottom-water formation, then Atlantic transport, then Arctic sea-ice 2-4 years later. Forty years of archives recorded both ends.","Profound, or a long coincidence. Check the data.","GEOFON + EarthScope seismic, against NSIDC sea-ice and ocean reanalysis.","Cross-correlate Southern-Hemisphere microseism power vs September Arctic ice at 1-5 year lag; discover on 1985-2005, confirm on 2005-2024.",['es']],
+ [33,3,'r',"Do Cosmic Rays Tell the Plankton When to Swim?","The wildest one, kept on purpose: after subtracting sun and moon, a cosmic-ray-flux residual may faintly phase-shift zooplankton's daily migration in 20 years of acoustic archives.","Probably not. But we explained the moon and the sun and there's something left over.","OOI mooring current-profilers and NOAA neutron-monitor cosmic-ray flux, against tides.","Does migration phase shift within 24-48 h of the 40+ well-dated Forbush cosmic-ray drops? Confirm on independent sites.",['es']],
+ [34,3,'y',"Nighttime Squid Boats Trace the Kuroshio Edge","Squid fleets chase the frontal zone, so the nightly gradient of satellite boat-lights is a higher-resolution, near-real-time tracer of the Kuroshio front than altimetry.","The fleet IS the survey. It just sends the bill to the squid.","VIIRS boat-detection, altimetry, SST and AIS.","Does the light-density edge track the altimetry front to &lt;50 km, 2012-2024, held out on the anomalous Tohoku-2011 year?",['vnl','ais']],
+ [35,3,'r',"Do Storms Make Cephalopods Deaf?","Anomalous seismic hum creates infrasound overlapping cephalopod statocyst resonance; mass strandings may cluster 48-72 h after hum spikes visible in 30-year archives.","This would mean storms make cephalopods deaf. That seems both terrible and testable.","EarthScope coastal stations, a NOAA stranding database, NDBC waves and ERA5.","Do top-decile microseism-power days precede strandings above chance (season-controlled)? Discover West Coast, validate East Coast.",['es','ndbc']],
+ [36,3,'r',"Forty Years of Shipping, Recorded by a Device That Measures the Moon","The collective pressure footprint of thousands of vessels may leave a coherent signal in 50-year tide-gauge residuals - tracking global shipping growth, no satellite needed.","The tide gauge was built for the Moon. It heard the container ships.","PSMSL / UHSLC sea level, ERA5 pressure, HYCOM, AIS and UN trade statistics.","Residual power at port-proximate gauges (Rotterdam, Singapore, LA) vs port tonnage; absent at remote Southern-Ocean gauges.",['psmsl','ais']],
+ [37,3,'r',"The Seismic Hum as a Cryptic AMOC Monitor","A sibling to #28 by a different mechanism: seismic hum at ridge-proximal stations may carry a 6-14-month-lagged overturning signal beyond wave forcing, hidden in 30-year archives.","MOSTLY HARMLESS. Unless it works.","EarthScope island stations, the RAPID AMOC array, ERA5 waves and GRACE-FO.","Cross-correlate 0.1-0.3 Hz power at Ascension vs RAPID transport; does a 6-14-month residual survive on a held-out period? (SNR is the risk.)",['es','rapid','grace']],
+ [38,3,'r',"Coral Skeletons as a Pre-Instrumental Cyclone Recorder","Boron isotopes and growth bands in coral cores encode cyclone-track density and ENSO before instruments existed - and all the data is open. The cleanest wild-card to actually test.","OPEN DATA. Statistically under-identified, but OPEN.","NCEI paleoclimatology coral cores, IBTrACS cyclone tracks and an ENSO index.","Regress residual boron-isotope ratio (after SST/pCO2) against 500 km cyclone-pass density per site; watch collinearity with ENSO.",['coral','ibtracs']],
+ [39,3,'r',"Melt-Pond Turbidity as an Arctic Methane Early-Warning","The turbidity of Arctic melt ponds seen from Sentinel-2 may lead methane flux by 2-4 weeks.","OPEN BUT SPARSE. The fun kind of impossible.","Sentinel-2 pond turbidity against NOAA Arctic flask methane.","Classify Beaufort Sea pond turbidity; correlate against flask methane with a 2-4 week forward lag (flask data is sparse).",[]],
+ [40,3,'r',"Plastic Windrows as a Readout of Invisible Currents","Windrow spacing in aerial surveys encodes the geometry of Langmuir cells that biogenic slicks alter in ways models don't capture - the plastic is the detector.","DATA UNAVAILABLE. As usual. The Guide is used to it.","Aerial/drone plastic-distribution maps, current profilers and wind-stress reanalysis.","Does windrow spacing disagree with wind-wave scaling in low-wind slices? (Blocked: no open aerial-windrow archive.)",[]],
+ [41,3,'r',"Bioluminescence Before Submarine Earthquakes","Satellite night-band radiance anomalies in a 10-40 day pre-window may precede magnitude-5+ submarine quakes.","MOSTLY HARMLESS. A null result is still publishable.","VIIRS Day/Night Band against a submarine earthquake catalog 2014-2024 (all open).","Case-control night-band anomaly vs M&gt;5 submarine events; note monthly compositing likely filters the signal - a real obstacle, and a publishable null.",['vnl']],
+ [42,3,'g',"The Seismic Hum's Lopsidedness as an Ice-Edge Thermometer","Sea ice damps local wave generation, so east-west asymmetry in seismometer hum tracks sea-ice extent per hemisphere sector.","The seismograph can see the ice by how quiet the sea gets.","EarthScope FDSN against NSIDC sea-ice (both open).","Ten-year east-west microseism-power asymmetry vs sector ice extent. A weekend project.",['es']]
+];
+
+const TIERLABEL={g:'weekend-testable',y:'probable',r:'moonshot'};
+const map=document.getElementById('map');
+let cards=[];
+CH.forEach((c,ci)=>{
+  const sec=document.createElement('div');sec.className='chapter';
+  sec.innerHTML='<h3><span class="cnum">'+c.n+'</span>'+c.t+'</h3><div class="csub">'+c.s+'</div>';
+  const grid=document.createElement('div');grid.className='grid';
+  I.filter(x=>x[1]===ci).forEach(x=>{
+    const n=x[0],tier=x[2],title=x[3],wow=x[4],rating=x[5],data=x[6],test=x[7],links=x[8];
+    const card=document.createElement('div');card.className='card';card.id='idea-'+n;card.dataset.tier=tier;card.dataset.n=n;card.tabIndex=0;
+    const linkHTML=(links||[]).map(k=>L[k]?'<a href="'+L[k][1]+'" target="_blank" rel="noopener">'+L[k][0]+' &#8599;</a>':'').join('');
+    card.innerHTML='<div class="card-face">'+
+        '<div class="card-top"><span class="card-n">'+String(n).padStart(2,'0')+'</span><span class="card-title">'+title+'</span><span class="chev">&#9662;</span></div>'+
+        '<div class="card-wow">'+wow+'</div>'+
+        '<div class="card-meta"><span class="rating">"'+rating+'"</span><span class="tierlab"><i class="dot '+tier+'"></i>'+TIERLABEL[tier]+'</span><a class="flaglink" href="roster.html?idea='+n+'" title="claim this idea on the roster">&#9873; plant your flag</a></div>'+
+      '</div>'+
+      '<div class="card-body">'+
+        '<div class="cb-lab">The data</div><div class="cb-txt">'+data+'</div>'+
+        '<div class="cb-lab">The one test</div><div class="cb-txt">'+test+'</div>'+
+        (linkHTML?'<div class="cb-links">'+linkHTML+'</div>':'')+
+      '</div>';
+    const face=card.querySelector('.card-face');
+    const toggle=()=>card.classList.toggle('open');
+    face.addEventListener('click',toggle);
+    var fl=card.querySelector('.flaglink'); if(fl){fl.addEventListener('click',function(e){e.stopPropagation();});}
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();toggle();}});
+    grid.appendChild(card);cards.push(card);
+  });
+  sec.appendChild(grid);map.appendChild(sec);
+});
+
+const counter=document.getElementById('counter');
+function updateCounter(){const vis=cards.filter(c=>c.style.display!=='none').length;counter.textContent=vis+' / 42 ideas';}
+updateCounter();
+
+document.getElementById('filters').addEventListener('click',e=>{
+  const b=e.target.closest('.fbtn');if(!b)return;
+  document.querySelectorAll('.fbtn').forEach(x=>x.setAttribute('aria-pressed','false'));
+  b.setAttribute('aria-pressed','true');
+  const f=b.dataset.f;
+  cards.forEach(c=>{c.style.display=(f==='all'||c.dataset.tier===f)?'':'none';});
+  document.querySelectorAll('.chapter').forEach(ch=>{
+    const any=[].slice.call(ch.querySelectorAll('.card')).some(c=>c.style.display!=='none');
+    ch.style.display=any?'':'none';
+  });
+  updateCounter();
+});
+
+const toast=document.getElementById('toast');
+function showToast(t){toast.textContent=t;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400);}
+document.getElementById('drive').addEventListener('click',()=>{
+  showToast('recalculating improbability...');
+  const visible=cards.filter(c=>c.style.display!=='none');
+  const target=pick(visible.length?visible:cards);
+  cards.forEach(c=>c.classList.remove('spot'));
+  setTimeout(()=>{
+    target.classList.add('open','spot');
+    target.scrollIntoView({behavior:RM?'auto':'smooth',block:'center'});
+    setTimeout(()=>target.classList.remove('spot'),2600);
+  },RM?0:650);
+});
+
+const FOUR=[
+ ["AIS Dark-Vessel Voids as an Ecosystem Proxy","Vessel absence as a lagged leading indicator of catch anomalies, with the 2020 COVID traffic collapse as a natural experiment.","Novelty: partially-done - GFW/Welch 2022 already links AIS-disabling to chlorophyll; the lag-to-catch framing is the fresher part.","https://www.science.org/doi/10.1126/sciadv.abq2109","Welch et al. 2022"],
+ ["Whale Dive-Depth as an Oxygen-Minimum-Zone Sensor","Decades of archival biologging reconstruct an oxygen-minimum-zone index 15+ years before the float network existed.","Novelty: partially-done - dive/OMZ link known since 1989; the retrospective climatology is the open part; dive depth is prey-confounded.","https://www.meop.net/meop-portal/value-of-meop.html","MEOP"],
+ ["Seal Dives + SWOT as a Reanalysis Bias Audit","Opportunistic under-ice profiles under the new wide-swath altimeter expose a systematic 5-15 m mixed-layer-depth bias in the ocean reanalysis.","Novelty: partially-done - seal hydrography is the MEOP mission; the SWOT+seal fusion is unoccupied but match-ups are sparse.","https://data.marine.copernicus.eu/product/GLOBAL_MULTIYEAR_PHY_001_030/services","GLORYS12"],
+ ["River-Plume Salinity Front as a Groundwater Proxy","Alongshore plume extent may lead gauged river discharge by weeks via groundwater recharge, with gravity satellites outpredicting gauges.","Novelty: partially-done - plume salinity mature, gravity-discharge lag known; the plume-to-gravity coupling specifically was not found.","https://podaac.jpl.nasa.gov/dataset/TELLUS_GRAC-GRFO_MASCON_CRI_GRID_RL06.3_V4","GRACE-FO"]
+];
+const fw=document.getElementById('fourwrap');
+FOUR.forEach((f,i)=>{
+  const title=f[0],comp=f[1],nov=f[2],url=f[3],label=f[4];
+  const c=document.createElement('div');c.className='four-card';c.tabIndex=0;
+  c.innerHTML='<div class="four-face"><h4>'+String(i+1).padStart(2,'0')+' &middot; '+title+'</h4><div class="four-comp">'+comp+'</div>'+
+     '<span class="stamp">availability-verified, not data-verified</span> <span class="tierlab"><i class="dot y"></i>probable</span></div>'+
+     '<div class="four-body"><div class="cb-lab">Novelty</div><div class="cb-txt">'+nov+' <a href="'+url+'" target="_blank" rel="noopener">'+label+' &#8599;</a></div></div>';
+  const face=c.querySelector('.four-face');const tog=()=>c.classList.toggle('open');
+  face.addEventListener('click',tog);c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();tog();}});
+  fw.appendChild(c);
+});
+
+const CHIPS=[
+ ['o','Argo floats','https://erddap.ifremer.fr/erddap/tabledap/ArgoFloats.html'],
+ ['o','MBARI Pacific Sound','https://registry.opendata.aws/pacific-sound/'],
+ ['o','EarthScope seismic','https://service.earthscope.org/fdsnws/dataselect/1/'],
+ ['o','NOAA passive acoustics','https://www.ncei.noaa.gov/products/passive-acoustic-data'],
+ ['o','DAS4Whale','https://zenodo.org/records/5823343'],
+ ['o','GEBCO bathymetry','https://download.gebco.net/'],
+ ['o','OBIS biodiversity','https://obis.org/'],
+ ['o','Marine Cadastre AIS','https://coast.noaa.gov/htdata/CMSP/AISDataHandler/2024/index.html'],
+ ['o','RAM Legacy fisheries','https://ramlegacy.org/'],
+ ['o','Watkins whale sounds','https://archive.org/details/watkins-marine-mammal-sound-database-full-cuts'],
+ ['o','HYCOM reanalysis','https://www.hycom.org/dataserver/gofs-3pt0/reanalysis'],
+ ['o','NCEI paleoclimate','https://www.ncei.noaa.gov/products/paleoclimatology'],
+ ['reg','MODIS/PACE ocean color','https://oceancolor.gsfc.nasa.gov/l3/'],
+ ['reg','GRACE-FO gravity','https://podaac.jpl.nasa.gov/dataset/TELLUS_GRAC-GRFO_MASCON_CRI_GRID_RL06.3_V4'],
+ ['reg','GLORYS12 reanalysis','https://data.marine.copernicus.eu/product/GLOBAL_MULTIYEAR_PHY_001_030/services'],
+ ['reg','SWOT altimetry','https://podaac.jpl.nasa.gov/SWOT'],
+ ['reg','WWLLN lightning','https://www.earthdata.nasa.gov/data/catalog/ghrc-daac-wwllnmth-1'],
+ ['reg','Global Fishing Watch','https://globalfishingwatch.org/dataset-and-code-fishing-effort/'],
+ ['app','Seabird Tracking DB','https://seabirdtracking.org']
+];
+const chipsEl=document.getElementById('chips');
+CHIPS.forEach(function(row){var t=row[0],name=row[1],url=row[2];var a=document.createElement('a');a.className='chip '+t;a.href=url;a.target='_blank';a.rel='noopener';
+  a.innerHTML='<i class="dot '+(t==='o'?'g':t==='reg'?'y':'r')+'"></i>'+name;chipsEl.appendChild(a);});
+
+if(!RM){
+  const sonar=document.getElementById('sonarLayer');
+  document.addEventListener('click',function(e){
+    if(e.target.closest('a,button,.card,.four-card')) return;
+    const p=document.createElement('div');p.className='ping';p.style.left=e.clientX+'px';p.style.top=e.clientY+'px';
+    sonar.appendChild(p);setTimeout(()=>p.remove(),1000);
+  });
+  document.addEventListener('mousemove',function(e){document.documentElement.style.setProperty('--mx',e.clientX+'px');document.documentElement.style.setProperty('--my',e.clientY+'px');});
+  window.addEventListener('scroll',function(){
+    const y=window.scrollY, h=document.body.scrollHeight-window.innerHeight;
+    document.body.classList.toggle('deepzone', h>0 && y/h>0.42);
+  },{passive:true});
+  const CRE={
+    jelly:'<svg width="34" height="46" viewBox="0 0 34 46"><path d="M4 16a13 13 0 0126 0c0 4-3 6-3 8H7c0-2-3-4-3-8z" fill="none" stroke="#3ef2d1" stroke-width="1.4"/><path d="M9 24c0 8-2 12-2 18M17 24v20M25 24c0 8 2 12 2 18" stroke="#3ef2d1" stroke-width="1.1" fill="none" opacity=".8"/></svg>',
+    angler:'<svg width="52" height="34" viewBox="0 0 52 34"><path d="M14 17c0-8 9-12 18-12 12 0 18 7 18 12s-6 12-18 12c-9 0-18-4-18-12z" fill="none" stroke="#ffd166" stroke-width="1.3"/><circle cx="46" cy="14" r="1.6" fill="#ffd166"/><path d="M14 17C9 17 4 13 2 9" stroke="#ffd166" stroke-width="1.1" fill="none"/><circle cx="2" cy="9" r="2.4" fill="#ffd166"/></svg>',
+    squid:'<svg width="30" height="50" viewBox="0 0 30 50"><path d="M15 3c7 0 10 6 10 13s-3 10-10 10S5 23 5 16 8 3 15 3z" fill="none" stroke="#ff5db1" stroke-width="1.3"/><path d="M9 26c-1 8-3 14-4 21M13 27v22M17 27v22M21 26c1 8 3 14 4 21" stroke="#ff5db1" stroke-width="1" fill="none" opacity=".8"/></svg>',
+    whale:'<svg width="70" height="26" viewBox="0 0 70 26"><path d="M2 15c10-9 30-12 46-8 8 2 20 5 20 8s-6 4-12 5c4 2 6 4 6 4s-8-1-12-3c-14 4-38 3-48-6z" fill="none" stroke="#8fd4e8" stroke-width="1.3"/><circle cx="14" cy="12" r="1" fill="#8fd4e8"/></svg>',
+    copepod:'<svg width="26" height="20" viewBox="0 0 26 20"><ellipse cx="10" cy="10" rx="8" ry="5" fill="none" stroke="#3ef2d1" stroke-width="1.2"/><path d="M18 10c3-3 6-4 7-6M18 10c3 3 6 4 7 6" stroke="#3ef2d1" stroke-width="1" opacity=".8"/></svg>'
+  };
+  const FACTS={
+    jelly:"Jellyfish predate the dinosaurs by ~250M years and have no brain. They don't need one to be right about the ocean.",
+    angler:"The anglerfish's lure is a colony of glowing bacteria. Symbiosis, but make it a fishing rod.",
+    squid:"A squid's giant axon is so big it launched half of modern neuroscience. It never got a citation.",
+    whale:"A blue whale's call can cross an ocean basin. This whole site is basically about reading its mail.",
+    copepod:"Copepods may be the most numerous animals on Earth, and they migrate vertically every night. See idea #33."
+  };
+  const cfact=document.getElementById('cfact');
+  const kinds=Object.keys(CRE);
+  function spawn(){
+    const k=kinds[Math.floor(Math.random()*kinds.length)];
+    const el=document.createElement('div');el.className='creature';el.innerHTML=CRE[k];
+    el.style.top=(8+Math.random()*80)+'vh';
+    const dur=22+Math.random()*26; const dir=Math.random()<0.5;
+    document.body.appendChild(el);
+    const from=dir?-90:window.innerWidth+90, to=dir?window.innerWidth+90:-90;
+    const start=performance.now();
+    function step(t){
+      const p=Math.min(1,(t-start)/(dur*1000));
+      const x=from+(to-from)*p; const bob=Math.sin(p*Math.PI*4)*10;
+      el.style.transform='translate('+(x-from)+'px, '+bob+'px)'+(dir?'':' scaleX(-1)');
+      if(p<1) requestAnimationFrame(step); else el.remove();
+    }
+    el.style.left=from+'px';
+    requestAnimationFrame(step);
+    el.addEventListener('mouseenter',function(ev){cfact.textContent=FACTS[k];cfact.style.left=Math.min(ev.clientX+14,window.innerWidth-244)+'px';cfact.style.top=(ev.clientY+14)+'px';cfact.style.opacity=1;});
+    el.addEventListener('mouseleave',function(){cfact.style.opacity=0;});
+  }
+  for(let i=0;i<3;i++) setTimeout(spawn, i*4000);
+  setInterval(spawn, 7000);
+}
+</script>
+</body>
+</html>

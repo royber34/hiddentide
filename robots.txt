@@ -1,0 +1,7 @@
+# hiddentide.com - all crawlers welcome, including AI answer engines
+# (OpenAI / OAI-SearchBot / GPTBot, Perplexity / PerplexityBot, Claude / ClaudeBot / Claude-SearchBot,
+#  Google / Google-Extended, Bing / bingbot). Discovery and citation are the goal, so nothing is blocked.
+User-agent: *
+Allow: /
+
+Sitemap: https://hiddentide.com/sitemap.xml
