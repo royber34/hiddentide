@@ -22,6 +22,14 @@ body:
       placeholder: "11 - The Shrimp Are Doing Your Oceanography"
     validations:
       required: true
+  - type: input
+    id: repo
+    attributes:
+      label: Link to your dive repo (optional)
+      description: The public repo (or folder) where your work will live, so the roster can point at it. Leave blank if you are just scouting and have not made it yet - you can add it later.
+      placeholder: "https://github.com/yourhandle/your-dive-repo"
+    validations:
+      required: false
   - type: dropdown
     id: status
     attributes:
