@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Logbook - Hidden Tide</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="The Hidden Tide logbook: field dispatches on AI-native ocean-data discovery. What we actually built, what it found, and where it honestly stops.">
+<meta name="theme-color" content="#030f1c">
+<meta property="og:title" content="The Logbook - Hidden Tide">
+<meta property="og:description" content="Field dispatches on AI-native ocean-data discovery. What we built, what it found, and where it honestly stops.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hiddentide.com/logbook/">
+<meta property="og:site_name" content="Hidden Tide">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://hiddentide.com/logbook/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--surface:#8fd4e8;--photic:#3aa6c9;--twilight:#0e3f63;--deep:#07243b;--abyss:#030f1c;--ink:#062033;--paper:#eaf4f8;--biolum:#3ef2d1;--jelly:#ff5db1;--lantern:#ffd166;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:64px;}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--paper);background:var(--abyss);line-height:1.65;padding-top:44px;}
+  #topnav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.55rem clamp(1rem,4vw,2rem);background:rgba(3,15,28,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(62,242,209,.14);font-family:'JetBrains Mono',monospace;font-size:.76rem;}
+  #topnav a{border-bottom:none;color:rgba(234,244,248,.82);}
+  #topnav a:hover{color:#fff;}
+  #topnav .brand{color:var(--biolum);font-weight:500;}
+  #topnav .navlinks{display:flex;gap:1.1rem;flex-wrap:wrap;justify-content:flex-end;}
+  @media (max-width:600px){#topnav{font-size:.68rem;padding:.5rem .8rem;} #topnav .navlinks{gap:.7rem;}}
+  a{color:var(--biolum);text-decoration:none;border-bottom:1px solid rgba(62,242,209,.35);}
+  a:hover{color:#fff;border-color:#fff;}
+  h1{font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.12;font-weight:700;letter-spacing:-.02em;font-size:clamp(2.1rem,6.5vw,4rem);margin-bottom:1rem;}
+  #bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(to bottom,#0e3f63 0%,#07243b 44%,#030f1c 100%);}
+  .wrap{max-width:820px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.4rem);}
+  header{padding:clamp(3rem,7vw,6rem) 0 1.4rem;}
+  .back{font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.06em;border:none;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lantern);margin:1.8rem 0 .6rem;}
+  .lede{font-size:clamp(1.05rem,1.8vw,1.25rem);color:rgba(234,244,248,.85);max-width:60ch;}
+  .entries{padding:1.6rem 0 3rem;}
+  .entry{display:block;background:rgba(14,63,99,.34);border:1px solid rgba(62,242,209,.14);border-radius:12px;padding:1.3rem 1.5rem;margin:1rem 0;border-bottom:1px solid rgba(62,242,209,.14);transition:border-color .15s,transform .15s;}
+  .entry:hover{border-color:var(--biolum);transform:translateY(-1px);}
+  .entry .no{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--biolum);}
+  .entry h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.35rem;color:var(--paper);margin:.35rem 0 .15rem;line-height:1.2;}
+  .entry .date{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:rgba(234,244,248,.5);}
+  .entry .desc{font-size:.92rem;color:rgba(234,244,248,.78);margin-top:.6rem;}
+  footer{padding:3rem 0 4rem;border-top:1px solid rgba(62,242,209,.1);font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.45);margin-top:1rem;}
+</style>
+</head>
+<body>
+<nav id="topnav">
+  <a class="brand" href="/index.html">&#8776; Hidden Tide</a>
+  <div class="navlinks">
+    <a href="/index.html#newly">the 42</a>
+    <a href="/index.html#zero">Category Zero</a>
+    <a href="/roster.html">the roster</a>
+    <a href="/logbook/">the logbook</a>
+    <a href="/method.html">the manual</a>
+  </div>
+</nav>
+<div id="bg"></div>
+
+<header><div class="wrap">
+  <a class="back" href="/index.html">&#8592; back to the Guide</a>
+  <div class="eyebrow">The Logbook</div>
+  <h1>Dispatches from the field</h1>
+  <p class="lede">The Guide says what could be found. The logbook is where we write down what we actually did, what it found, and exactly where it stops. Newest first.</p>
+</div></header>
+
+<section class="entries"><div class="wrap">
+
+  <a class="entry" href="/logbook/the-keepers-thermometer.html">
+    <div class="no">Entry 02 &#183; 2026</div>
+    <h2>The Keeper's Thermometer</h2>
+    <div class="date">2026-08-03</div>
+    <div class="desc">An AI read an un-transcribed 1885 lighthouse keeper's logbook and recovered a 122-day daily temperature record that predates the town's official one by a decade. Independent physics confirms it read right. Mission #1, run for real.</div>
+  </a>
+
+  <a class="entry" href="/logbook/we-pulled-the-bytes.html">
+    <div class="no">Entry 01 &#183; 2026</div>
+    <h2>We Pulled the Bytes</h2>
+    <div class="date">2026-07-31</div>
+    <div class="desc">One person and an AI took a cross-modal ocean-discovery method from a plan to a working, self-checking instrument, on free data with no accounts. How far it goes, and exactly where it honestly stops.</div>
+  </a>
+
+</div></section>
+
+<footer><div class="wrap">
+  <p>Every number in these dispatches traces to a reproducible run on public data. Method and citations live in <a href="/method.html">the manual</a>; the work lives in each diver's own repo, linked from <a href="/roster.html">the roster</a>.</p>
+  <p style="margin-top:1.2rem;opacity:.6">The Hitchhiker's Guide to the Ocean's Hidden Data &#183; the logbook. &#183; Hidden Tide &#183; hiddentide.com</p>
+</div></footer>
+</body>
+</html>
