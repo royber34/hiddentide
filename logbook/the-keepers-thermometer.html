@@ -86,6 +86,9 @@
   .rating{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--abyss);background:var(--biolum);border-radius:5px;padding:.28rem .6rem;font-weight:500;}
   ul{margin:.6rem 0 .6rem 1.2rem;} li{margin:.4rem 0;color:rgba(234,244,248,.86);}
   .pull{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.3rem,2.6vw,1.7rem);line-height:1.3;color:var(--paper);border-left:3px solid var(--jelly);padding-left:1.1rem;margin:1.8rem 0;font-weight:500;}
+  .fig{margin:1.7rem 0;}
+  .fig img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid rgba(62,242,209,.18);}
+  .fig figcaption{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.55);margin-top:.6rem;line-height:1.5;}
   blockquote{font-family:'JetBrains Mono',monospace;font-size:.86rem;color:rgba(234,244,248,.82);background:rgba(3,15,28,.5);border-left:2px solid var(--lantern);padding:.9rem 1.1rem;margin:1.1rem 0;border-radius:0 8px 8px 0;}
   footer{padding:3rem 0 4rem;border-top:1px solid rgba(62,242,209,.1);font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.45);}
   .cite{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.6);}
@@ -128,6 +131,10 @@
 <section><div class="wrap">
   <h2><span class="num">01</span>The warm-up: reading against a human</h2>
   <p>We started where we could be graded. The Yaquina Head keeper logs (Newport, Oregon) have been partly transcribed by volunteers, so there is a human answer key. We handed the AI a page from January 1892 and asked it to read the wind and sea, cold.</p>
+  <figure class="fig">
+    <img src="/logbook/img/yaquina-1892-log.jpg" loading="lazy" alt="A scanned page of the Yaquina Head lighthouse keeper's log from January 1892, dense columns of handwritten daily entries for wind, weather and sea state.">
+    <figcaption>The Yaquina Head keeper's log, January 1892: wind and sea, in his hand, every day. The warm-up, where a human transcription already existed to grade against. The AI read it 14 days out of 14.</figcaption>
+  </figure>
   <div class="grid3">
     <div class="stat"><div class="big">14 / 14</div><div class="lbl">days where the AI reading of wind and sea matched the human transcription, on an 1892 Yaquina Head page</div></div>
     <div class="stat"><div class="big">Jan 2, 1892</div><div class="lbl">the keeper's "Gale to fresh breeze, Sea rough" - the day an independent reanalysis shows the month's lowest pressure and roughly double its wind</div></div>
@@ -140,6 +147,10 @@
   <h2><span class="num">02</span>The real test: a book with no answer key</h2>
   <p>The South Haven journals, kept by keeper James Donahue on Lake Michigan in the 1880s, were digitized for preservation and then left alone. Page images, no transcription, no OCR, no dataset. Nobody had read them into anything. Which means there is no answer key at all - and that is precisely what makes them the right test. With no human transcript to lean on, the only thing that can tell you whether the machine read the handwriting correctly is whether the numbers it pulled off the page agree with independent physics.</p>
   <p>The keeper wrote a thermometer reading in the left margin every day: "1 below zero," "26 above zero," "5 below zero." We read a stretch of them and checked against the <a href="https://psl.noaa.gov/data/20thC_Rean/" target="_blank" rel="noopener">20th Century Reanalysis</a> - a physical reconstruction of past weather that has never seen this book. The cold snaps and warm-ups lined up, day for day. So we did the whole book.</p>
+  <figure class="fig">
+    <img src="/logbook/img/southhaven-1885-journal.jpg" loading="lazy" alt="A scanned spread of the South Haven, Michigan lighthouse journal from 1885, with daily weather entries and a temperature reading noted in the left margin.">
+    <figcaption>The South Haven journal, 1885 (keeper's hand). The daily thermometer reading sits in the left margin ("X above / below zero"); wind, sea and events run alongside. Never transcribed until now, which is exactly what made it the honest test.</figcaption>
+  </figure>
 </div></section>
 
 <section><div class="wrap">
