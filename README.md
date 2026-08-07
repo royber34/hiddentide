@@ -13,6 +13,7 @@ A single static site. No framework, no build step, no dependencies. Just open `i
 - `robots.txt` + `sitemap.xml` - crawler and AI-answer-engine discovery (all bots welcomed).
 - `llms.txt` - a structured brief for LLMs / AI answer engines, with the honesty framing up top so the project is represented accurately (candidates, not results).
 - `favicon.svg` - tab icon.
+- `talk/` - the "Unlock with AI" talk. `talk/` is the landing (watch / click-through-slides + downloadable resources); `talk/slides/` is the self-contained deck, instrumented with per-slide GA events (`slide_view` / `slide_dwell`). The deck carries **no** base gtag of its own (Netlify injection provides it) to avoid double-counting.
 
 Each page's `<head>` also carries: meta description, canonical URL, Open Graph + Twitter cards, `theme-color`, and (on the home page) a `WebSite` JSON-LD structured-data block for clean entity attribution by search and AI engines.
 
@@ -21,6 +22,9 @@ Verify the site in Google Search Console and Bing Webmaster Tools and submit `si
 
 ## Deploy
 Hosted on Netlify, auto-deploys on every push to `main`. Domain (hiddentide.com) is on Infomaniak DNS pointed at Netlify. No build command; publish directory is the repo root.
+
+## Analytics (heads-up: not in this repo)
+Site-wide analytics is **Google Analytics 4** (property `hiddentide`, Measurement ID `G-M7205EX2SL`). The gtag.js tag is **not** in these HTML files. It is injected into every served page's `<head>` via **Netlify Snippet Injection** (Site configuration -> Build & deploy -> Post processing -> Snippet Injection), so it covers the root and every current and future subpage automatically with no per-file edits. Because it lives in Netlify config rather than git, it will not be visible in the codebase and will not follow a host migration - re-add it if the site ever moves. Do **not** also paste the base gtag into a page (double-tagging inflates page views); the `/talk` deck therefore carries only its custom per-slide events, not a second base tag. Enhanced Measurement is on (page views, scroll, outbound clicks, downloads, YouTube video engagement).
 
 ## Join the crew (claim a dive)
 Pick any idea (the 42) or a Category Zero engine, then add yourself to `roster.json` via a pull request (or open a "claim a dive" issue and a maintainer adds you). One object:
