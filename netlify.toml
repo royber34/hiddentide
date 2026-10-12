@@ -19,3 +19,12 @@
   for = "/roster.json"
   [headers.values]
     Cache-Control = "no-cache"
+
+# The generated blog: proxied from the Content Engine build.
+# status = 200 makes this a transparent proxy (the reader stays on
+# hiddentide.com); force = true makes it authoritative for /blog/*.
+[[redirects]]
+  from = "/blog/*"
+  to = "https://hiddentide-astro.vercel.app/blog/:splat"
+  status = 200
+  force = true
