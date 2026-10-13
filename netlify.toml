@@ -28,3 +28,19 @@
   to = "https://hiddentide-astro.vercel.app/blog/:splat"
   status = 200
   force = true
+
+# Add this rule. Keep the existing "/blog/*" rule exactly as it is: Vercel
+# answers every /blog URL with a 301 to /logbook, and Netlify relays that 301
+# through the proxy (measured 2026-10-12: /blog/blog/<slug> answered 301 from
+# Netlify with Vercel's Location header). Removing the /blog rule would turn
+# every old link into a Netlify 404 instead of a redirect.
+#
+# force is NOT set on this rule, on purpose. Without force, a file that
+# exists in this repo wins over the proxy, so logbook/index.html and the two
+# entries keep serving from here until the step that deletes them. That is
+# what makes the rollout order safe: nothing on /logbook breaks while the
+# Vercel side is being filled.
+[[redirects]]
+  from = "/logbook/*"
+  to = "https://hiddentide-astro.vercel.app/logbook/:splat"
+  status = 200
