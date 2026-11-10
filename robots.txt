@@ -5,3 +5,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://hiddentide.com/sitemap.xml
+Sitemap: https://hiddentide.com/logbook/sitemap.xml
