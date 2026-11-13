@@ -27,7 +27,7 @@
   "author": {"@type": "Organization", "name": "Hidden Tide", "url": "https://hiddentide.com"},
   "publisher": {"@type": "Organization", "name": "Hidden Tide"},
   "datePublished": "2026-07-31",
-  "dateModified": "2026-08-02",
+  "dateModified": "2026-11-13",
   "mainEntityOfPage": "https://hiddentide.com/logbook/we-pulled-the-bytes.html",
   "keywords": "AI ocean discovery, cross-modal discovery, free ocean data, upwelling, hypothesis-free discovery"
 }
@@ -39,8 +39,8 @@
   "mainEntity": [
     {"@type":"Question","name":"Is this a scientific discovery?","acceptedAnswer":{"@type":"Answer","text":"No. It is a validation. An AI-native cross-modal method re-derived a known ocean coupling (wind-driven upwelling feeding a coastal chlorophyll bloom) on held-out years without being told the relationship. The claim is that the instrument works and can be caught when it is wrong, not that a new phenomenon was found."}},
     {"@type":"Question","name":"How much of the data was free?","acceptedAnswer":{"@type":"Answer","text":"All of it, with no accounts. Sea-surface temperature, ocean-colour chlorophyll, satellite wind stress, Argo float profiles and hurricane tracks were all pulled from open ERDDAP servers with a plain URL."}},
-    {"@type":"Question","name":"How strong was the result?","acceptedAnswer":{"@type":"Answer","text":"Modest but real. Held-out reconstruction skill was R-squared 0.14, concentrated at the upwelling coast, with the correct physical sign and a 2 to 6 day lag, while a planted pure-noise channel was reconstructed with zero skill and given zero weight."}},
-    {"@type":"Question","name":"Did the discovery hunt find anything new?","acceptedAnswer":{"@type":"Answer","text":"No, and that is the intended result. Turned loose to scan every cross-modal pair over the California Current, including sea-surface salinity, the validated method re-found the known upwelling coupling, flagged only trivial identities, and surfaced zero novel candidates above the planted-noise floor. An engine that re-finds the known and invents nothing is the trustworthy kind. The real search for undocumented couplings needs under-analysed sensor-exhaust data or a less-studied sea."}}
+    {"@type":"Question","name":"How strong was the result?","acceptedAnswer":{"@type":"Answer","text":"Modest but real. Held-out reconstruction skill was R-squared 0.14, concentrated at the upwelling coast, with the correct physical sign and a 2 to 6 day lag, while a planted pure-noise channel was reconstructed with zero skill and given zero weight. Update, November 2026: our own audit found that chlorophyll's persistence alone beats 0.14, and persistence was part of the bar we registered in advance. Tested against that bar properly, temperature still adds a small, real increment on top of persistence, well above a shuffled-year control. We also tested on 2021-22 instead of the 2023-24 window we had registered. A clean one-time retest on never-touched 2024 data has since run. Temperature added a small, real increment (R-squared up by about 0.007, well clear of shuffled controls), below the 0.02 we set in advance as worth claiming, so the honest label is an informative null."}},
+    {"@type":"Question","name":"Did the discovery hunt find anything new?","acceptedAnswer":{"@type":"Answer","text":"No, and that is the intended result. Turned loose to scan every cross-modal pair over the California Current, including sea-surface salinity, the validated method re-found the known upwelling coupling, flagged only trivial identities, and surfaced zero novel candidates above its cut-off. Update, November 2026: that cut-off was a fixed threshold, and it also missed the textbook wind-to-chlorophyll link, so this null reflects a blunt scan as much as a quiet sea. The real search for undocumented couplings needs under-analysed sensor-exhaust data or a less-studied sea."}}
   ]
 }
 </script>
@@ -137,24 +137,24 @@
   <p>Before the real test, a sanity check: could we fuse two datasets built for completely unrelated purposes and pull a genuine relationship out? We matched hurricane tracks to nearby floats and asked the textbook question - does the sea cool in a storm's wake?</p>
   <div class="grid3">
     <div class="stat"><div class="big">&minus;0.43&#8451;</div><div class="lbl">storm-attributable surface cooling, once ordinary seasonal drift is controlled out</div></div>
-    <div class="stat"><div class="big">p = 0.006</div><div class="lbl">against each float's own storm-free weeks - a real effect, not a season</div></div>
+    <div class="stat"><div class="big">16 storms</div><div class="lbl">where the 154 float pairs came from. Counted per float the test gives p = 0.006, but floats near the same storm are not independent; grouped by storm it is p &asymp; 0.09 to 0.17. The textbook direction, in a small sample.</div></div>
     <div class="stat"><div class="big">156</div><div class="lbl">storm-float encounters analysed, 2023&ndash;24 North Atlantic (154 had a clean before/after pair for the paired test above)</div></div>
   </div>
-  <p>The cold wake, re-found from two archives that were never meant to be read together. Mechanically, we could fuse. Now the actual experiment.</p>
+  <p>The cold wake, re-found from two archives that were never meant to be read together. Mechanically, we could fuse. (November 2026 audit: with only 16 storms in the sample, the cooling is suggestive here; the textbook establishes it, this warm-up only re-points at it.) Now the actual experiment.</p>
 </div></section>
 
 <section><div class="wrap">
   <h2><span class="num">03</span>The real test: make it re-derive a law nobody handed it</h2>
   <p>Off the coast of California, cold nutrient-rich water rises to the surface when the wind blows the right way, and a few days later the sea turns green with phytoplankton. Upwelling drives a bloom. It is one of the most documented couplings in coastal oceanography - which is exactly why it makes a perfect exam question. If the method is a real microscope, it should re-derive this <em>without being told it exists.</em></p>
-  <p>So we built a stack: seven years of daily maps, four signals laid on the same grid - temperature, wind stress, chlorophyll, and one channel of <em>deliberately fake</em> data, statistically identical noise with the real structure scrambled out. We stripped the seasonal cycle from everything, because otherwise "they both peak in summer" would fake a relationship out of thin air. Then we trained a model to rebuild each signal from the <em>others</em> - chlorophyll never singled out, just one of four. And we split it in time: learn on 2016&ndash;2020, freeze, and grade on 2021&ndash;22, <em>years the model had never seen.</em></p>
+  <p>So we built a stack: seven years of daily maps, four signals laid on the same grid - temperature, wind stress, chlorophyll, and one channel of <em>deliberately fake</em> data: noise with any real structure scrambled out (scrambled in space, smooth in time, which made it an easier decoy than we thought; see the correction below). We stripped the seasonal cycle from everything, because otherwise "they both peak in summer" would fake a relationship out of thin air. Then we trained a model to rebuild each signal from the <em>others</em> - chlorophyll never singled out, just one of four. And we split it in time: learn on 2016&ndash;2020, freeze, and grade on 2021&ndash;22, <em>years the model had never seen.</em></p>
   <p>Three questions, all written down in advance:</p>
   <div class="grid3">
     <div class="stat"><div class="big">R&sup2; = 0.14</div><div class="lbl"><strong>Sensitivity.</strong> It reconstructed the bloom on unseen years, from the other signals alone.</div></div>
-    <div class="stat"><div class="big">&asymp; 0</div><div class="lbl"><strong>Specificity.</strong> The planted noise channel: reconstruction skill R&sup2; = &minus;0.01, and 0.00 weight inside the bloom model. It refused to be fooled.</div></div>
+    <div class="stat"><div class="big">&asymp; 0</div><div class="lbl"><strong>Specificity.</strong> The planted noise channel: reconstruction skill R&sup2; = &minus;0.01, and 0.00 weight inside the bloom model. It ignored the decoy, though the decoy was an easy one.</div></div>
     <div class="stat"><div class="big">correct sign</div><div class="lbl"><strong>Direction.</strong> As the wind turned upwelling-favourable, predicted chlorophyll rose, at a two-to-six-day lag: the right physics, never encoded. (A lagged-anomaly check, separate from what the model leans on to reconstruct.)</div></div>
   </div>
   <p>And a fourth thing we did not ask for but got anyway: the model's skill <em>hugged the coast</em> - bright right where upwelling lives, dark out in the open ocean. It didn't just find a number; it found the right place.</p>
-  <p class="pull">Nobody told it that wind feeds blooms. It read that off the joint structure - and it wouldn't invent a relationship where we had hidden only noise.</p>
+  <p class="pull">Nobody told it that upwelling feeds blooms. It read that off the joint structure, and it left our planted noise alone.</p>
 </div></section>
 
 <section><div class="wrap">
@@ -167,13 +167,16 @@
       <li><strong>This is a validation, not a discovery.</strong> We re-found something science already knows. Its only claim is that the instrument works - and that it can be caught when it is wrong. Which, as the manual says, is the most you can honestly ask of a discovery engine, silicon or otherwise.</li>
     </ul>
   </div>
+  <div class="rule">
+    <p style="margin-top:0"><strong>Correction (November 2026).</strong> When we re-audited this test, we found three things we should have caught. The bar we wrote down in advance included chlorophyll's own persistence, and persistence beats R&sup2; = 0.14 on its own. The check we registered was on 2023-24, and we ran it on 2021-22. And the noise channel was scrambled in space but smooth in time, which makes it a weaker control than it sounds. Re-tested the right way, the coupling survives: sea temperature adds a small, real increment over persistence that shuffled controls never reach. The one-time retest on 2024 data nobody had touched has since run. Sea temperature added a small, real increment over persistence (R&sup2; up by about 0.007, well clear of shuffled controls), below the 0.02 we set in advance as worth claiming, so the honest label is an informative null.</p>
+  </div>
 </div></section>
 
 <section><div class="wrap">
   <h2><span class="num">05</span>What travels, even if you never care about the ocean</h2>
   <p>Three things from this are worth stealing for any "did the machine actually find something" problem:</p>
   <h3>Plant a fake.</h3>
-  <p>The load-bearing move was the channel of scrambled noise. A model that passes a sensitivity test still might be overfitting; a model that passes sensitivity <em>and</em> ignores a planted null is a different animal. The negative control is what separates a working microscope from a confident mirror.</p>
+  <p>The load-bearing move was the channel of scrambled noise. A model that passes a sensitivity test still might be overfitting; a model that passes sensitivity <em>and</em> ignores a planted null is a different animal. The negative control is what separates a working microscope from a confident mirror. (In hindsight our noise channel was too easy to ignore; the next generation of tests plants realistic fake signals and decoys and reports how many the method catches.)</p>
   <h3>Deseasonalise before you believe anything.</h3>
   <p>Shared calendars are the great forger of false couplings. Run everything on anomalies and "they both peak in summer" stops being able to lie to you.</p>
   <h3>The free tier is bigger than the gatekeepers admit.</h3>
@@ -190,15 +193,15 @@
 <section><div class="wrap">
   <div class="eyebrow" style="color:var(--biolum)">Update &#183; August 2026 &#183; we took the next move</div>
   <h2><span class="num">07</span>We ran the hunt. The ocean kept its secrets, and that is the good news.</h2>
-  <p>We said the next move was to widen the net and go looking for a coupling that <em>isn't</em> in the textbooks. So we did. We added more channels to the California Current stack, including sea-surface salinity, a genuinely independent sense of the sea, and turned the instrument loose to score every possible cross-modal pair on held-out years, with the same planted-noise floor deciding what counts as real. <span class="rating">Guide rating: reassuringly boring</span></p>
+  <p>We said the next move was to widen the net and go looking for a coupling that <em>isn't</em> in the textbooks. So we did. We added more channels to the California Current stack, including sea-surface salinity, a genuinely independent sense of the sea, and turned the instrument loose to score every possible cross-modal pair on held-out years, with a fixed skill cut-off deciding what counts as real (too blunt, as it turned out; see below). <span class="rating">Guide rating: reassuringly boring</span></p>
   <div class="grid3">
-    <div class="stat"><div class="big">0</div><div class="lbl">undocumented couplings survived the search. Everything that cleared the noise floor was either the known upwelling link or a trivial identity, like wind measured against itself.</div></div>
+    <div class="stat"><div class="big">0</div><div class="lbl">undocumented couplings survived the search. Everything that cleared the cut-off was either the known upwelling link or a trivial identity, like wind measured against itself.</div></div>
     <div class="stat"><div class="big">sst&#8594;chl</div><div class="lbl">the one real coupling it re-found, and exactly the one it should: the upwelling signature from the exam question, back again.</div></div>
     <div class="stat"><div class="big">silent</div><div class="lbl">salinity, our best shot at a novel pair, was too clouded by coastal noise to carry a signal; its every coupling sank below the floor.</div></div>
   </div>
-  <p>This is not the anticlimax it looks like. Point a tireless machine at a wide-open search and the classic failure is a thousand thrilling couplings that are all noise. Ours returned the knowns, the trivialities, and nothing false. An engine that re-finds what is real and refuses to invent what isn't is the only kind you can trust with a genuine unknown. <em>The dog that didn't bark is the whole point.</em></p>
+  <p>This is not the anticlimax it looks like. Point a tireless machine at a wide-open search and the classic failure is a thousand thrilling couplings that are all noise. Ours returned the knowns, the trivialities, and nothing false. That reads as reassuring, and half of it is: nothing false got through. Our November audit found the other half. The cut-off was blunt enough to miss the textbook wind-to-chlorophyll link too, so the scan was quiet partly because it was deaf. The next search measures its own hearing first, with planted signals of known size. <em>The dog that didn't bark is the whole point.</em></p>
   <p>It helps that we aimed at one of the most-studied seas on the planet, with instruments that have been read against each other for decades. There was little undocumented ground left to find. The real hunt for something new lives where nobody has thought to look: the ocean's overheard data, the fishing fleets lighting up the dark, the ship-tracks, the hum of the seafloor, or simply a lonelier sea. That is the next expedition, and it will need a bigger boat.</p>
-  <p class="pull">We built a microscope, looked through it, and honestly reported that the slide was blank. That is the unsung half of a working instrument: when it isn't blank, you will be able to believe it.</p>
+  <p class="pull">We built a microscope, looked through it, and reported a blank slide. In November we found the focus was off: the scan was too blunt to see even a textbook link. So the next version tests its lens on planted signals of known size first, and then the next blank slide, or the next bright one, can be believed.</p>
   <p>Don't panic. Bring a held-out set.</p>
   <p style="margin-top:1.6rem"><a href="/method.html">Read the manual &#8594;</a> &#160;&#160; <a href="/index.html">Back to the 42 ideas &#8594;</a></p>
 </div></section>
