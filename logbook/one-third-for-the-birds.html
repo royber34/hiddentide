@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One-third of what? Where a famous seabird number comes from - Hidden Tide</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Cury et al. (2011, Science) found that seabird breeding success starts to fall when prey drops near its long-term mean, and reported it as 34.6% of maximum: one-third for the birds. We rebuilt their method from the published scripts. The 34.6% is a position on a pooled range of standardized values; as a share of a stock's own maximum it differs by stock, and for 10 of the 19 seabird-prey pairs it sits above one-third.">
+<meta name="keywords" content="one-third for the birds, Cury 2011, seabird breeding success, forage fish, fisheries management, reproducibility, z-scores, change point, Norwegian herring, Hidden Tide">
+<meta name="author" content="Hidden Tide">
+<meta name="theme-color" content="#030f1c">
+<meta property="og:title" content="One-third of what? Where a famous seabird number comes from">
+<meta property="og:description" content="We rebuilt the 'one-third for the birds' analysis from its published R scripts. The threshold sits where the authors said, near the prey's long-term mean. The 34.6% is a position on a pooled standardized range; as a share of a stock's maximum it differs by stock, and for 10 of the 19 pairs a firm lower bound already sits above one-third.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://hiddentide.com/logbook/one-third-for-the-birds.html">
+<meta property="og:site_name" content="Hidden Tide">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://hiddentide.com/logbook/one-third-for-the-birds.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "One-third of what? Where a famous seabird number comes from",
+  "description": "A rebuild of the Cury et al. 2011 'one-third for the birds' analysis from its published R scripts: the threshold sits near the prey's long-term mean; the 34.6% is a position on a pooled standardized range, and in a stock's own units the share differs by stock.",
+  "author": {"@type": "Organization", "name": "Hidden Tide", "url": "https://hiddentide.com"},
+  "publisher": {"@type": "Organization", "name": "Hidden Tide"},
+  "datePublished": "2026-11-13",
+  "dateModified": "2026-11-13",
+  "mainEntityOfPage": "https://hiddentide.com/logbook/one-third-for-the-birds.html",
+  "keywords": "one-third for the birds, seabirds, forage fish, reproducibility, fisheries management"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Does the 'one-third for the birds' threshold reproduce?","acceptedAnswer":{"@type":"Answer","text":"Yes. Rebuilt from the R scripts printed in the paper's supplement and run on its printed dataset, the method returns a threshold of -0.0917 standard deviations and 34.67%, against the published -0.092 and 34.6%. The threshold sits near the long-term mean of prey, as the authors wrote."}},
+    {"@type":"Question","name":"What does the 34.6% measure?","acceptedAnswer":{"@type":"Answer","text":"The script computes the threshold's position on the pooled range of standardized prey values, from the lowest value in any of the 19 series to the highest in any series. As a share of one stock's own maximum, the same threshold differs by stock: 16.2% for Norwegian spring-spawning herring, the one stock we could match to a raw series. For the other pairs it can only be bounded, and for 10 of the 19 pairs even the lower bound sits above one-third."}},
+    {"@type":"Question","name":"Has this been pointed out before?","acceptedAnswer":{"@type":"Answer","text":"The closest earlier work we know of is Guillemette and colleagues (2018, Marine Ecology Progress Series), who asked whether there is one universal threshold of food abundance; we could not open it, so we do not report its figures. In the citing papers we could search, about 45% of the works that cite the paper, we found no earlier note that the 34.6% is a position in a pooled standardized range. A 2015 working paper by D. S. Butterworth for South Africa's pelagic scientific working group criticised standardising on a single extreme value. A note could exist in a document we did not reach."}}
+  ]
+}
+</script>
+<style>
+  :root{--surface:#8fd4e8;--photic:#3aa6c9;--twilight:#0e3f63;--deep:#07243b;--abyss:#030f1c;--ink:#062033;--paper:#eaf4f8;--biolum:#3ef2d1;--jelly:#ff5db1;--lantern:#ffd166;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:64px;}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--paper);background:var(--abyss);line-height:1.7;padding-top:44px;}
+  #topnav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.55rem clamp(1rem,4vw,2rem);background:rgba(3,15,28,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(62,242,209,.14);font-family:'JetBrains Mono',monospace;font-size:.76rem;}
+  #topnav a{border-bottom:none;color:rgba(234,244,248,.82);}
+  #topnav a:hover{color:#fff;}
+  #topnav .brand{color:var(--biolum);font-weight:500;}
+  #topnav .navlinks{display:flex;gap:1.1rem;flex-wrap:wrap;justify-content:flex-end;}
+  @media (max-width:600px){#topnav{font-size:.68rem;padding:.5rem .8rem;} #topnav .navlinks{gap:.7rem;}}
+  a{color:var(--biolum);text-decoration:none;border-bottom:1px solid rgba(62,242,209,.35);}
+  a:hover{color:#fff;border-color:#fff;}
+  h1,h2,h3,.disp{font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.14;font-weight:700;letter-spacing:-.02em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  #bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(to bottom,#0e3f63 0%,#07243b 40%,#030f1c 100%);}
+  .wrap{max-width:820px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.4rem);}
+  header{padding:clamp(3rem,7vw,6rem) 0 2rem;}
+  .back{font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.06em;border:none;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--jelly);margin:1.8rem 0 .6rem;}
+  h1{font-size:clamp(2rem,6vw,3.6rem);margin-bottom:1rem;}
+  .lede{font-size:clamp(1.05rem,1.8vw,1.25rem);color:rgba(234,244,248,.85);max-width:62ch;}
+  .byline{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.5);margin-top:1.2rem;letter-spacing:.04em;}
+  section{padding:2.2rem 0;border-top:1px solid rgba(62,242,209,.1);}
+  h2{font-size:clamp(1.4rem,3vw,2rem);color:var(--lantern);margin-bottom:.4rem;}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:.7em;color:var(--biolum);opacity:.6;margin-right:.5rem;}
+  h3{font-size:1.12rem;margin:1.2rem 0 .3rem;}
+  p{margin:.9rem 0;color:rgba(234,244,248,.86);}
+  em{color:rgba(234,244,248,.95);}
+  .tldr{background:rgba(62,242,209,.05);border:1px solid rgba(62,242,209,.16);border-radius:10px;padding:1.2rem 1.4rem;margin:1.4rem 0;}
+  .tldr strong{color:var(--biolum);}
+  .rule{background:rgba(255,93,177,.07);border:1px solid rgba(255,93,177,.24);border-radius:10px;padding:1.2rem 1.4rem;margin:1.2rem 0;}
+  .rule strong{color:var(--jelly);}
+  .honest{background:rgba(255,209,102,.06);border:1px solid rgba(255,209,102,.22);border-radius:10px;padding:1.2rem 1.4rem;margin:1.2rem 0;}
+  .honest strong{color:var(--lantern);}
+  .stat{background:rgba(14,63,99,.34);border:1px solid rgba(62,242,209,.14);border-radius:10px;padding:1.1rem 1.25rem;margin:.9rem 0;}
+  .stat .big{font-family:'Space Grotesk',sans-serif;font-size:1.7rem;color:var(--biolum);font-weight:700;}
+  .stat .lbl{font-size:.9rem;color:rgba(234,244,248,.82);}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.2rem 0;}
+  @media (max-width:640px){.grid3{grid-template-columns:1fr;}}
+  .rating{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--abyss);background:var(--biolum);border-radius:5px;padding:.28rem .6rem;font-weight:500;}
+  ul,ol{margin:.6rem 0 .6rem 1.2rem;} li{margin:.4rem 0;color:rgba(234,244,248,.86);}
+  .pull{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.3rem,2.6vw,1.7rem);line-height:1.3;color:var(--paper);border-left:3px solid var(--jelly);padding-left:1.1rem;margin:1.8rem 0;font-weight:500;}
+  .fig{margin:1.7rem 0;}
+  .fig img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid rgba(62,242,209,.18);}
+  .fig figcaption{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.55);margin-top:.6rem;line-height:1.5;}
+  blockquote{font-family:'JetBrains Mono',monospace;font-size:.86rem;color:rgba(234,244,248,.82);background:rgba(3,15,28,.5);border-left:2px solid var(--lantern);padding:.9rem 1.1rem;margin:1.1rem 0;border-radius:0 8px 8px 0;}
+  blockquote code{word-break:break-all;}
+  footer{padding:3rem 0 4rem;border-top:1px solid rgba(62,242,209,.1);font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.45);}
+  .cite{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.6);}
+  .draft-banner{position:sticky;top:44px;z-index:30;background:var(--jelly);color:var(--abyss);font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:.45rem 1rem;font-weight:500;}
+</style>
+</head>
+<body>
+<nav id="topnav">
+  <a class="brand" href="/index.html">&#8776; Hidden Tide</a>
+  <div class="navlinks">
+    <a href="/index.html#newly">the 42</a>
+    <a href="/index.html#zero">Category Zero</a>
+    <a href="/roster.html">the roster</a>
+    <a href="/logbook/">the logbook</a>
+    <a href="/method.html">the manual</a>
+  </div>
+</nav>
+<div id="bg"></div>
+
+<header><div class="wrap">
+  <a class="back" href="/index.html">&#8592; back to the Guide</a>
+  <div class="eyebrow">Logbook &#183; entry 05 &#183; a check on a famous number</div>
+  <h1>One-third of what?</h1>
+  <p class="lede">In 2011 a team of seabird and fisheries scientists gave ocean management a rule you can say in one breath: leave one-third for the birds. We rebuilt their analysis from the paper's own supplement to see where the number comes from. The threshold lands where they said it does, near the long-term average of the prey. The 34.6% behind "one-third of the maximum" is a position on a pooled ruler of standardized values, and in a real stock it means different things. For 10 of the 19 seabird-prey pairs, even a firm lower bound puts the threshold above one-third of the stock's maximum. In the one stock we could measure directly (Norwegian herring, counted as young fish) it sits at 16%. <span class="rating">Guide rating: mind the ruler</span></p>
+  <p class="byline">Hidden Tide &#183; the logbook &#183; November 2026</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="tldr">
+    <p style="margin-top:0"><strong>The one-paragraph version.</strong> Cury and colleagues pooled 19 seabird-and-prey time series from seven ecosystems and found that breeding success starts to fall when prey drops to about its long-term average, a point they reported as 34.6% of the maximum observed prey abundance. We rebuilt their pipeline from the published R scripts and got <strong>34.67%</strong>. The script's conversion gives the threshold's position on the pooled range of standardized values, which equals a share of a stock's maximum only if that stock's worst year was near zero. For most pairs we can only put a floor under that share, from 14% to 49% depending on the series, and for <strong>10 of the 19 pairs</strong> the floor already sits above one-third. For the one stock we could match to raw data, Norwegian herring (counted as young fish, the paper's own herring measure), the threshold is 16.2% of its maximum. The authors' own per-series thresholds, in their Table S1, also vary: 22% to 61%. Seabirds need food; the question here is which ruler the number was measured on.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">00</span>A rule you can say in one breath</h2>
+  <p>The paper is Cury et al. 2011, "Global seabird response to forage fish depletion &#8211; one-third for the birds", in <em>Science</em>. It is an ambitious, carefully documented piece of work. The team gathered 19 series that pair a seabird's breeding success with an index of its main prey (fish and krill, which they call "forage fish"): 14 bird species, seven ecosystems, 438 paired observations. Each series was standardized to its own mean and spread, so that a gannet colony in South Africa and a puffin colony in Norway could share one chart.</p>
+  <p>The pattern has a clear shape. When prey is plentiful, breeding success sits on a plateau. When prey gets scarce, it falls and becomes more variable. The bend is the headline. In their words:</p>
+  <blockquote>"The threshold at which breeding success began to decline from the asymptote was not significantly different from the long-term mean of prey abundance (range -0.30 and +0.13 standard deviation of the mean, Fig. 2A). The threshold was 34.6% (95% confidence interval 31% to 39%), or approximately one-third of the maximum observed prey abundance."</blockquote>
+  <p>From that they proposed a guideline for managers: to "maintain forage fish biomass above one-third of the maximum observed long-term biomass". A rule that short travels well: by 2015, South Africa's pelagic scientific working group was weighing it as a performance threshold for the country's fishery management procedure.</p>
+  <p class="pull">A number that fits in a sentence travels far. So it pays to know what it measures.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">01</span>Rebuilding the machine</h2>
+  <p>The authors did something that makes a check like this possible at all: their supplement prints every standardized data point and the R scripts behind the threshold. So we rebuilt the pipeline and ran it on their data.</p>
+  <div class="grid3">
+    <div class="stat"><div class="big">34.67%</div><div class="lbl">our rebuild, on the paper's own data, against the published 34.6%</div></div>
+    <div class="stat"><div class="big">-0.0917 SD</div><div class="lbl">the rebuilt threshold on the standardized scale, against the published -0.092</div></div>
+    <div class="stat"><div class="big">30.9-38.7%</div><div class="lbl">the rebuilt 95% bootstrap interval, against the published 31% to 39%</div></div>
+  </div>
+  <p>It matches to the published precision. The few choices the scripts leave open (smoother settings, for example) were settled by matching the published numbers before any simulation ran.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">02</span>The line that makes "one-third"</h2>
+  <p>The last step is one line of R, exactly as printed in the supplement:</p>
+  <blockquote><code>percentage_threshold &lt;- (threshold+abs(min(prey)))/(max(prey)+abs(min(prey)))</code></blockquote>
+  <p>The label printed on the plot next to the result reads "% of max prey abundance".</p>
+  <p><code>prey</code> is the pooled column of standardized values. Its minimum is the scarcest standardized year across all 19 series: a poor year for rockfish off California (2005, at -1.91 standard deviations from that series' mean). Its maximum is the richest: a boom year for young herring off Norway (2002, at +3.34). The formula measures how far along that ruler the threshold (-0.092) sits: 34.7% of the way.</p>
+  <figure class="fig">
+    <img src="/logbook/img/one-third-for-the-birds/fig1-two-readings.png" loading="lazy" alt="Two horizontal rulers. Top: 438 pooled standardized prey values from -1.91 (rockfish, California Current, 2005) to +3.34 (young herring, Norwegian Sea, 2002), with the threshold at z = -0.092 marked 34.7% of the way along. Bottom: the 45 yearly values of Norwegian spring-spawning herring recruits as a share of their maximum, with the same threshold at 16.2% and the one-third mark for comparison.">
+    <figcaption>Figure 1. Two readings of one threshold. Top: the paper's formula gives the threshold's position on the pooled ruler, whose ends come from two different stocks in two oceans: 34.7%. Bottom: the same threshold in one stock's own units (Norwegian spring-spawning herring, age-0 recruits, RAM Legacy v4.44, 1964-2009) sits at 16.2% of its maximum.</figcaption>
+  </figure>
+  <p>So the 34.6% is a position. Because the bend is close to the mean (zero on this scale), it mostly reports where the mean falls on that ruler: 36.4% for these data.</p>
+  <p>The guideline reads the same number as a share: keep each stock above one-third of its own maximum biomass. That is a different quantity, and the two meet only in a special case.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">03</span>From the ruler to the water</h2>
+  <p>For a single stock, call <em>p</em> the threshold's position between that stock's lowest and highest years, and <em>r</em> its lowest year divided by its highest. Then the threshold's share of the maximum is <em>r + (1 - r) &#215; p</em>. If the stock once fell to almost nothing, <em>r</em> is near zero and share equals position. If its worst year still held plenty of fish, the share is larger.</p>
+  <figure class="fig">
+    <img src="/logbook/img/one-third-for-the-birds/fig2-the-algebra.png" loading="lazy" alt="Diagram of the identity: share of maximum equals r plus (1 minus r) times p. Two bars run from zero to a stock's highest year. In the first, the lowest year is near zero and the threshold's share equals its position p. In the second, the stock never fell below a fraction r of its maximum, that part is hatched as never reached, and the threshold's share is larger than p.">
+    <figcaption>Figure 2. The algebra. p is what the script's formula reports; r is a stock's lowest year divided by its highest. The readings agree only when r is zero. Norwegian herring: r = 0.0006, share 16.2%, position 16.1%. The bars are schematic.</figcaption>
+  </figure>
+  <p>The authors saw stock-to-stock spread themselves: their Table S1 gives each series its own threshold, from 22% to 61% of that series' maximum, with a 28% coefficient of variation across them. Those come from each series' own curve, by a conversion the supplement does not show, so they may not compare directly with what follows, where we carry the one pooled threshold into each stock.</p>
+  <p>Standardizing removes what this step needs (how variable each stock was and how low it went), so it takes raw series. Before reading any, we fixed a rule: a raw series counts only if its standardized values track the paper's at a correlation of 0.98 or better, year for year.</p>
+  <p>One stock passed. Norwegian spring-spawning herring, counted as age-0 recruits in the RAM Legacy stock-assessment database, matches the paper's prey series with a correlation of 0.992 over 45 years. It feeds two pairs, the puffins and kittiwakes of R&#248;st. This stock went through a long collapse from the 1960s to the 1980s, and its worst year held 0.06% of the young fish of its best. So <em>r</em> is close to zero, and the threshold's share of the maximum is close to its position: 16.2%.</p>
+  <div class="grid3">
+    <div class="stat"><div class="big">16.2%</div><div class="lbl">the threshold as a share of the herring stock's maximum, in its own units</div></div>
+    <div class="stat"><div class="big">2 of 19</div><div class="lbl">pairs matched to a raw series; our rule needed 8 for a general claim</div></div>
+    <div class="stat"><div class="big">13.9-48.9%</div><div class="lbl">the floors across all 19 pairs: the lowest share each could have</div></div>
+  </div>
+  <p>For the other 17 pairs no raw series passed, so we bound them. Each pair has a floor, the share it would have if its worst year were zero. If the stocks were about as variable as the published data suggest (a coefficient of variation, the spread relative to the average, of 0.3 to 0.6), the threshold would land at roughly 40% to 60% of each stock's maximum. That band is at the low end for small pelagic fish, and the two raw series we saw swung more (0.8 and 1.5), so only the floor is a firm bound.</p>
+  <figure class="fig">
+    <img src="/logbook/img/one-third-for-the-birds/fig3-per-stock-shares.png" loading="lazy" alt="Ten horizontal range bars, one per prey series in the paper, showing where the threshold could sit as a share of that stock's maximum. Each bar runs from a floor, where the stock's lowest year is zero, to the share at a coefficient of variation of 0.3. Floors run from 13.9% for Norwegian herring to 48.9% for California rockfish. A pink diamond marks the one measured value, 16.2% for Norwegian herring. A dashed line marks one-third.">
+    <figcaption>Figure 3. The same threshold in each stock's own units. Only Norwegian herring could be measured (16.2%, diamond). For the rest, the standardized data fix only a range: the circle is the floor (worst year at zero); ticks mark the share at a coefficient of variation of 0.6 (short) and 0.3 (tall). Pairs sharing one prey series over the same years are grouped (19 pairs, 10 rows); the two Cape gannet colonies share a series but cover different years, so they standardize differently and keep separate rows.</figcaption>
+  </figure>
+  <p>The generous reading, which we think is right: as a summary of where the threshold sits within each stock's own range, the pooled 34.6% is a fair middle value (the per-pair positions have a median of 34.3%, or 32.7% counting each prey series once). The step that needs care is the one from "a third of the way up the range" to "a third of the maximum", which depends on how low each stock went: about 16% for the herring, and higher for stocks that never crashed.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">04</span>A second check: worlds with no threshold</h2>
+  <p>A blunter question: if breeding success had no threshold at all, would the method still say "about one-third"? We built 1,000 synthetic versions of the dataset for each of two threshold-free worlds, matched to the paper's 19 series in length, gaps and prey shape. In one, breeding success rises in a straight line with prey. In the other, it follows a smooth curve that levels off with no sharp bend, its half-way point placed at random for each series. That curve has the broad shape the paper describes, which is the point of the test: it asks whether the method finds "one-third" in a curve with no single bend to find. Then we ran the pipeline on all 2,000.</p>
+  <figure class="fig">
+    <img src="/logbook/img/one-third-for-the-birds/fig4-null-worlds.png" loading="lazy" alt="Histogram of the percent-of-maximum value returned by the paper's method on 1,000 simulated datasets with a straight-line response (teal) and 1,000 with a smooth saturating response (pink), neither containing a threshold. Both distributions centre near one-third, with medians of 35.7% and 37.7%. The published 34.6% and its 31% to 39% interval sit in the middle.">
+    <figcaption>Figure 4. Worlds with no threshold. On 2,000 simulated datasets shaped like the paper's, the rebuilt pipeline returns medians of 35.7% (straight line) and 37.7% (smooth curve); 27.2% and 39.7% of runs land inside 31-39%.</figcaption>
+  </figure>
+  <p>The published 34.6% sits in the middle of both worlds. Our rule, written before any run: at least half the runs inside 31-39% in either world would mean an artefact of the method; under a fifth in both, a clean result. Neither happened, so the verdict is <em>inconclusive</em>. The method lands near one-third in these worlds often enough that the number's location, taken alone, is weak evidence for where a biological threshold sits, and too unevenly to prove an artefact. This test speaks only to where the number lands; the authors' other evidence for a threshold, such as the rise in variance below it, is a separate matter we did not test.</p>
+  <p>Part of the pull comes from the search window: the script looks for the bend only in the lowest 150 of its 200 grid points (the lowest 74.9% of the pooled range, whose middle sits at 37.4%), and lifting that limit moves the straight-line world's median from 35.7% to 49.0%. The real data behave differently: lifting it there barely moves the published threshold (34.7% to 34.2%), which is mild evidence of a bend in their data beyond the window's pull.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">05</span>The part where we try to talk you out of it</h2>
+  <p>Before anyone else makes it, here is the case against us.</p>
+  <div class="honest">
+    <ul>
+      <li style="margin-top:0"><strong>The authors said it first.</strong> Their text places the threshold at the long-term mean of prey, and that result reproduces exactly. Their own robustness check, a mixed model allowing for differences between ecosystems, put it at -0.12, close to the main -0.092. Our point concerns the conversion to "one-third of the maximum" and the guideline built on it.</li>
+      <li><strong>One measured stock.</strong> Two pairs, one series, one long collapse: the kind of stock where the share sits lowest. With the paper's own peak year (2002, against 1992 in the raw series) the share is 14.3%. One near-miss points the other way: the African penguin pair matches South Africa's sardine-plus-anchovy survey biomass with a correlation of 0.991, but only with a one-year shift our rule did not allow, and there the threshold sits at 34.4% of the maximum.</li>
+      <li><strong>The threshold-free test leans on assumptions.</strong> With more variable prey (a coefficient of variation of 0.6 to 1.2), the smooth-curve world puts 50.4% of runs inside the window, just over our artefact bar, and the simulated worlds are simple.</li>
+      <li><strong>The authors' per-series numbers.</strong> Table S1's values come from each series' own curve, so they are not directly comparable with our per-pair shares (the two herring pairs read 22% and 26% there). If their conversion used raw units, part of our per-stock point was in the paper from the start.</li>
+      <li><strong>Has anyone said this before?</strong> The closest earlier work we know of is Guillemette and colleagues (2018, <em>Marine Ecology Progress Series</em>), whose title asks: "Is there one universal threshold of food abundance?" We could not open their paper or its publisher page, so we do not report their figures here, and we cannot say whether they note the pooled ruler. In the citing papers we could search (about 45% of the works citing Cury et al., through citation snippets and keyword searches), we found no earlier note that the 34.6% is a position in a pooled standardized range. A 2015 working paper by D. S. Butterworth for South Africa's pelagic working group warned that "basing standardisation on a single and 'extreme' value is not a statistically robust procedure"; it reads the number as a fraction of the historic maximum. A note could exist in a report we did not reach.</li>
+      <li><strong>Whether seabirds need food.</strong> They do, and keeping enough forage fish in the water for them is the purpose of the rule. Nothing here makes a case for lower limits: for 10 of the 19 pairs even the floor sits above one-third, and the 16% is one stock, counted in young fish rather than tonnes.</li>
+    </ul>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="num">06</span>What we would ask the authors</h2>
+  <p>We would welcome the authors' view on four questions:</p>
+  <ol>
+    <li>Was "% of max prey abundance" meant as a position on the pooled standardized range, and how would you translate it for one stock?</li>
+    <li>How were the per-series percentages in Table S1 computed?</li>
+    <li>Do raw prey series exist for the sandeel, krill and rockfish pairs, so their shares can be measured instead of bounded?</li>
+    <li>Would a rule stated relative to each stock's own long-term mean carry your result more directly than a share of the maximum?</li>
+  </ol>
+  <p>If we have misread the script, we want to know.</p>
+  <p class="pull">Keep enough fish for the birds. And when the rule travels, send the ruler with it.</p>
+  <p>Don't panic. Bring a held-out set, and check the units.</p>
+  <p style="margin-top:1.6rem">The technical note and code are available on request. &#160;&#160; <a href="/logbook/the-keepers-thermometer.html">The keeper's thermometer &#8594;</a></p>
+</div></section>
+
+<footer><div class="wrap">
+  <p class="cite">Sources: Cury, P. M. et al. (2011) Global seabird response to forage fish depletion: one-third for the birds. <em>Science</em> 334(6063):1703-1706, <a href="https://doi.org/10.1126/science.1212928" target="_blank" rel="noopener">doi:10.1126/science.1212928</a>; author manuscript with the supplement, dataset and R scripts on <a href="https://archimer.ifremer.fr/doc/00056/16770/14307.pdf" target="_blank" rel="noopener">Archimer</a>. Guillemette, M., Gr&#233;goire, F., Bouillet, D., Rail, J.-F., Bolduc, F., Caron, A. and Pelletier, D. (2018) Breeding failure of seabirds in relation to fish depletion: is there one universal threshold of food abundance? <em>Marine Ecology Progress Series</em> 587:235-245, <a href="https://doi.org/10.3354/meps12442" target="_blank" rel="noopener">doi:10.3354/meps12442</a>. Butterworth, D. S. (2015) Some comments on the suggested use of the 'one third for the birds' measure as a pelagic OMP performance statistic threshold. FISHERIES/2015/JULY/SWG-PEL/24, MARAM, University of Cape Town (<a href="https://open.uct.ac.za/bitstreams/76bc80c2-f393-444d-b8cf-af7693e95b82/download" target="_blank" rel="noopener">PDF</a>). Norwegian spring-spawning herring recruits from the <a href="https://ramlegacy.org" target="_blank" rel="noopener">RAM Legacy Stock Assessment Database</a> v4.44. Citing literature searched through Semantic Scholar citation contexts and OpenAlex. Rebuild, simulations, raw-series match and figures by Hidden Tide, November 2026; the technical note and code are available on request.</p>
+  <p style="margin-top:1.4rem;opacity:.6">The Hitchhiker's Guide to the Ocean's Hidden Data &#183; the logbook. &#183; Hidden Tide &#183; hiddentide.com</p>
+</div></footer>
+</body>
+</html>
