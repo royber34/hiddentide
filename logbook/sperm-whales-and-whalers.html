@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>One ground, four voyages: a second look at a famous sperm whale result - Hidden Tide</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="description" content="Whitehead, Smith and Rendell (2021) found that whalers' success at striking sighted sperm whales fell by about 58% within a few years of whaling reaching a North Pacific region. We re-ran their published data: the drop reproduces and holds under voyage resampling, but most of the early evidence comes from regions whose first sighting in the 2021 data falls in 1822 (mainly the Japan grounds), and from four voyages.">
+<meta name="description" content="Whitehead, Smith and Rendell (2021) report that whalers' success at striking sighted sperm whales fell by about 58% within a few years of whaling reaching a North Pacific region. We re-ran their published data: the drop reproduces and holds under voyage resampling, but most of the early evidence comes from regions whose first sighting in the 2021 data falls in 1822 (mainly the Japan grounds), and from four voyages.">
 <meta name="keywords" content="sperm whales, whaling logbooks, social learning, animal culture, Whitehead Smith Rendell 2021, Biology Letters, reproducibility, bootstrap, Nicholson Whaling Collection, AI handwriting, held-out test, Hidden Tide">
 <meta name="author" content="Hidden Tide">
 <meta name="theme-color" content="#030f1c">
@@ -37,8 +37,8 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"Did sperm whales learn to avoid whalers?","acceptedAnswer":{"@type":"Answer","text":"Possibly. Whitehead, Smith and Rendell (2021) found that the share of sighted sperm whales that American whalers struck fell by about 58% within a few years of whaling reaching a North Pacific region, and a social-learning model fitted best among the causes they tested. Our re-analysis of their published data reproduces the drop and finds it stable under voyage resampling. Most of the early evidence, though, comes from regions whose first sighting in the 2021 data falls in 1822, mainly the Japan grounds. Without them, a plain before-and-after comparison gives a 31% drop with a 95% voyage interval of -37% to 56%, which includes zero, so the wider claim is unconfirmed."}},
-    {"@type":"Question","name":"Does this show the 2021 study was wrong?","acceptedAnswer":{"@type":"Answer","text":"No. The published analysis reproduces (58.19% and 2.45 years against the paper's 58% and 2.4 years), and in the full data the drop holds under voyage resampling (95% interval 41.9% to 69.3%). Our check shows that the evidence for a North Pacific-wide effect rests mostly on one ground and four voyages, so more early logbooks are needed to test it elsewhere."}},
+    {"@type":"Question","name":"Did sperm whales learn to avoid whalers?","acceptedAnswer":{"@type":"Answer","text":"Possibly. Whitehead, Smith and Rendell (2021) report that the share of sighted sperm whales that American whalers struck fell by about 58% within a few years of whaling reaching a North Pacific region, and a social-learning model fitted best among the causes they tested. Our re-analysis of their published data reproduces the drop and finds it stable under voyage resampling. Most of the early evidence, though, comes from regions whose first sighting in the 2021 data falls in 1822, mainly the Japan grounds. Without them, a plain before-and-after comparison gives a 31% drop with a 95% voyage interval of -37% to 56%, which includes zero, so the wider claim is unconfirmed."}},
+    {"@type":"Question","name":"Does this show the 2021 study was wrong?","acceptedAnswer":{"@type":"Answer","text":"No. The published analysis reproduces (58.19% and 2.45 years against the paper's 58% and 2.4 years), and in the full data the drop holds under voyage resampling (95% interval 41.9% to 69.3%). Our check finds that the evidence for a North Pacific-wide effect rests mostly on one ground and four voyages, so more early logbooks are needed to test it elsewhere."}},
     {"@type":"Question","name":"Can more logbooks settle it?","acceptedAnswer":{"@type":"Answer","text":"That is the next step, and it needs the right logbooks. Of 751 digitised items in the Providence Public Library's Nicholson Whaling Collection, 502 are outside the database the study used, and we have sealed them unread for a future test. They would add only about 61 sighting-days from a region's first three years, against 150 needed for a decisive test, and our AI reader scored 88.7% against our own 90% bar."}}
   ]
 }
@@ -93,6 +93,10 @@
   blockquote{font-family:'JetBrains Mono',monospace;font-size:.86rem;color:rgba(234,244,248,.82);background:rgba(3,15,28,.5);border-left:2px solid var(--lantern);padding:.9rem 1.1rem;margin:1.1rem 0;border-radius:0 8px 8px 0;}
   footer{padding:3rem 0 4rem;border-top:1px solid rgba(62,242,209,.1);font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.45);}
   .cite{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(234,244,248,.6);}
+  .src{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;border-radius:4px;padding:.1rem .4rem;margin-right:.45rem;vertical-align:middle}
+  .src.theirs{border:1px solid var(--lantern);color:var(--lantern)}
+  .src.ours{background:var(--biolum);color:var(--abyss)}
+  .src.mixed{border:1px solid var(--biolum);color:var(--biolum)}
   .draftbanner{display:block;background:var(--jelly);color:var(--abyss);font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:.5rem 1rem;font-weight:500;border-radius:6px;margin-bottom:1.4rem;}
 </style>
 </head>
@@ -113,87 +117,110 @@
   <a class="back" href="/index.html">&#8592; back to the Guide</a>
   <div class="eyebrow">Logbook &#183; entry 04 &#183; a second look at a famous result</div>
   <h1>One ground, four voyages</h1>
-  <p class="lede">In 2021 three researchers showed that American whalers got much worse at striking sperm whales within a few years of reaching each new North Pacific region, and asked whether the whales had learned from one another how to get away. They published every file needed to check it, so we checked. The result reproduces, and it holds when we shake it voyage by voyage. Then we asked where the evidence lives. Most of it sits in the regions whose first sighting in the 2021 data falls in 1822, mainly the Japan grounds, and in the logs of four voyages. <span class="rating">Guide rating: sturdy on one ground, unproven on the rest</span></p>
+  <p class="lede">In 2021 three researchers reported that American whalers got much worse at striking sperm whales within a few years of reaching each new North Pacific region, and asked whether the whales had learned from one another how to get away. They published every file needed to check it. When we reran it, the result reproduced and held voyage by voyage. But we found most of the early evidence in regions whose first sighting in the 2021 data falls in 1822, mainly the Japan grounds, and in the logs of four voyages. <span class="rating">Guide rating: sturdy on one ground, unproven on the rest</span></p>
   <p class="byline">Hidden Tide &#183; the logbook, archive edition &#183; 2026</p>
+  <p class="byline" style="margin-top:.4rem">Updated 13 November 2026: clearer labels for what comes from the original papers and what is our own analysis.</p>
 </div></header>
 
 <section><div class="wrap">
   <div class="tldr">
-    <p style="margin-top:0"><strong>The one-paragraph version.</strong> Whitehead, Smith and Rendell (2021, <em>Biology Letters</em>) found that the share of sighted sperm whales that whalers struck fell by about 58% within a few years of whaling reaching a North Pacific region, and asked whether rapid social learning explains it. We re-ran their published data: <strong>58.19%</strong>, time scale 2.45 years. Resampling whole voyages 10,000 times puts the drop's 95% interval at <strong>41.9% to 69.3%</strong>. But regions whose first sighting in the 2021 data falls in 1822, mainly the Japan grounds, hold <strong>138 of the 190</strong> sighting-days from the crucial first three years. Counted by voyage instead of by region, four voyages supply 148 of those 190 early days. Without the 1822 regions, a plain before-and-after comparison gives a <strong>31%</strong> drop (53% on all the data), with a 95% interval from -37% to 56% that includes zero. The famous result stands where the data are dense. Testing its "large scale" part needs more early logbooks: the 502 sealed ones we found would add about 61 early sighting-days, against 150 needed.</p>
+    <p style="margin-top:0"><strong>The one-paragraph version.</strong> Whitehead, Smith and Rendell (2021, <em>Biology Letters</em>) report that the share of sighted sperm whales that whalers struck fell by about 58% within a few years of whaling reaching a North Pacific region, and ask whether rapid social learning explains it. When we reran their published data, the drop reproduced and survived voyage resampling. But most of the early evidence comes from regions first logged in 1822 and from four voyages. Without those regions, our before-and-after comparison gives a <strong>31%</strong> drop, with a 95% interval (-37% to 56%) that includes zero. The famous result stands where the data are dense; its "large scale" part needs more early logbooks.</p>
+  </div>
+  <div class="tldr">
+    <p style="margin-top:0"><strong>What comes from where.</strong></p>
+    <p><strong>From the published work</strong></p>
+    <ul>
+      <li>The claim: whalers' strike rate on sighted sperm whales fell by about 58%, over a time scale of about 2.4 years, after whaling reached a North Pacific region, possibly through rapid social learning (<a href="https://doi.org/10.1098/rsbl.2021.0030" target="_blank" rel="noopener">Whitehead, Smith and Rendell, 2021</a>).</li>
+      <li>The data and code behind it, including the 2,405 sighting-days, published openly with the paper under CC BY 4.0 (<a href="https://doi.org/10.6084/m9.figshare.14198527.v1" target="_blank" rel="noopener">Whitehead, Smith and Rendell, 2021, supplement</a>).</li>
+      <li>The daily whaling records it draws on, published as the American Offshore Whaling Logbook database by the New Bedford Whaling Museum, Nantucket Historical Association and Mystic Seaport Museum, CC BY 4.0 (<a href="https://whalinghistory.org/participate/download/" target="_blank" rel="noopener">AOWL, 2025</a>).</li>
+    </ul>
+    <p><strong>Our own checks</strong></p>
+    <ul>
+      <li>We reproduced their model on their data (58.19% and 2.45 years) and resampled whole voyages (95% interval 41.9% to 69.3%).</li>
+      <li>We measured where the early evidence sits (the 1822-onset regions and four voyages) and reran the drop without those regions (31%, interval -37% to 56%).</li>
+      <li>We matched 751 Providence Public Library logbook items against AOWL, projected how many early sighting-days the 502 outside it could add (about 61, against 150 needed), and tested an AI reader on four logbooks (88.7% agreement with AOWL).</li>
+    </ul>
   </div>
 </div></section>
 
 <section><div class="wrap">
   <h2><span class="num">00</span>A famous drop</h2>
-  <p>A nineteenth-century whaling logbook is a diary of encounters: each day, where the ship was, whether whales were seen, whether the boats got one fast. Maury abstracted many such logs for his 1851 whale chart, and the Census of Marine Life digitised more. Together they cover roughly one American whaling voyage in ten.</p>
-  <p>Hal Whitehead, Tim Smith and Luke Rendell used those days to ask a sharp question. For each day sperm whales were sighted in the North Pacific between 10 and 50 degrees north, they looked back for the first sighting within 1,000 km: the moment whaling, as far as the logs know, reached that patch of ocean. Then they counted whales struck per day of sightings, year by year. In their words, the share of sighted whales that whalers "succeeded in harpooning (striking)... fell by about 58% over the first few years", with a fitted time scale of about 2.4 years.</p>
+  <p>A nineteenth-century whaling logbook is a diary of encounters: each day, where the ship was, whether whales were seen, whether the boats got one fast. Maury abstracted many such logs for his 1851 whale chart, and the Census of Marine Life digitised more. By the authors' estimate, these records cover roughly one American whaling voyage in ten.</p>
+  <p>Hal Whitehead, Tim Smith and Luke Rendell used those days to ask a sharp question. For each day sperm whales were sighted in the North Pacific between 10 and 50 degrees north, they looked back for the first sighting within 1,000 km: the moment whaling, as far as the logs know, reached that patch of ocean. Then they counted whales struck per day of sightings, year by year. In their words, the share of sighted whales that whalers "succeeded in harpooning (striking)... fell by about 58% over the first few years", and they report a fitted time scale of about 2.4 years.</p>
   <figure class="fig page">
     <img src="/logbook/img/sperm-whales-and-whalers/logbook-alexander-coffin-1834.jpg" loading="lazy" alt="A handwritten page from the journal of the whaleship Alexander Coffin, late January and early February 1834, with daily entries in brown ink and four inked whale-shaped stamps, each marked with the barrels of oil the whale gave: 22, then 20, 18 and 20.">
-    <figcaption>The ship Alexander Coffin, late January to early February 1834, near the equator at about 117&#176; west. Each stamp marks a sperm whale taken and the barrels of oil it gave. The voyage is already in the whaling database and in the 2021 data (this equatorial page lies outside the study area). Our AI reader was tested on pages like this one. Providence Public Library, Nicholson Whaling Collection (CC BY 4.0), via the Internet Archive.</figcaption>
+    <figcaption>The ship Alexander Coffin, late January to early February 1834, near the equator at about 117&#176; west. Each stamp marks a sperm whale taken and the barrels of oil it gave. The voyage is in AOWL and the 2021 data; this equatorial page lies outside the study area. Our AI reader was tested on pages like this one. Providence Public Library, Nicholson Whaling Collection (CC BY 4.0), via the Internet Archive.</figcaption>
   </figure>
-  <p>Their title ends in a question mark, and the paper earns it. The authors weighed rival explanations: better first whalers, the most vulnerable whales dying first, and each family unit learning from its own close calls. Of the causal models they fitted, the best was one in which wary groups pass their caution to naive ones. They re-ran the analysis with 500 km and 2,000 km regions and with the whalers' own named grounds, and the picture held. Their supplement also notes that days from one voyage are related, so the error bars may be too narrow. That note is where we started.</p>
+  <p>Their title ends in a question mark, and the paper earns it. The authors weighed rival explanations: better first whalers, the most vulnerable whales dying first, and each family unit learning from its own close calls. Of the causal models they fitted, the best was one in which wary groups pass their caution to naive ones. They re-ran the analysis with 500 km and 2,000 km regions and with the whalers' own named grounds, and report that the picture held. Their supplement also notes that days from one voyage are related, so the error bars may be too narrow. That note is where we started.</p>
 </div></section>
 
 <section><div class="wrap">
   <h2><span class="num">01</span>Re-running it from their own files</h2>
   <p>The supplement holds the data, the MATLAB code and the region rules, under a CC BY 4.0 licence. We rebuilt the rules in Python on the same file, with no new data.</p>
   <div class="grid3">
-    <div class="stat"><div class="big">2,405</div><div class="lbl">sperm whale sighting-days at 10-50&#176;N in our rebuild, the same count the paper reports</div></div>
-    <div class="stat"><div class="big">58.19%</div><div class="lbl">the refitted drop in strike rate (the paper: 58%)</div></div>
-    <div class="stat"><div class="big">2.45 yr</div><div class="lbl">the refitted time scale of the decline (the paper: 2.4 years)</div></div>
+    <div class="stat"><div class="big">2,405</div><div class="lbl"><span class="src theirs">from the paper</span>sperm whale sighting-days at 10-50&#176;N, reported by the authors and reproduced by us</div></div>
+    <div class="stat"><div class="big">58%</div><div class="lbl"><span class="src theirs">from the paper</span>the drop in strike rate the authors report, over a time scale of about 2.4 years</div></div>
+    <div class="stat"><div class="big">58.19%</div><div class="lbl"><span class="src mixed">their data, our analysis</span>our refit of their model on their data, with a time scale of 2.45 years</div></div>
   </div>
-  <p>Even the small print matched: 13 sighting-days two years after onset, in the paper and in our rebuild. An open, exactly reproducible analysis is what made everything below possible.</p>
+  <p>Even the small print matched: 13 sighting-days two years after onset, in the paper and in our rebuild.</p>
 </div></section>
 
 <section><div class="wrap">
   <h2><span class="num">02</span>Shaking it, one voyage at a time</h2>
   <p>The file's "voyage" field holds voyage segments: 1,091 within-year pieces of 240 voyages. Days from one voyage share a captain, a crew and a run of luck, so we resampled whole voyages, 10,000 times, refitting the curve each time.</p>
   <div class="grid3">
-    <div class="stat"><div class="big">41.9-69.3%</div><div class="lbl">95% interval for the drop across 10,000 voyage resamples of the full data (111 voyages)</div></div>
-    <div class="stat"><div class="big">3.0 points</div><div class="lbl">the most that leaving out any single early voyage moves the drop; it stays above 55%</div></div>
-    <div class="stat"><div class="big">0.35%</div><div class="lbl">share of resamples in which the drop vanishes (zero or below)</div></div>
+    <div class="stat"><div class="big">41.9-69.3%</div><div class="lbl"><span class="src mixed">their data, our analysis</span>95% interval for the drop across our 10,000 voyage resamples of the full data (111 voyages)</div></div>
+    <div class="stat"><div class="big">3.0 points</div><div class="lbl"><span class="src mixed">their data, our analysis</span>the most that leaving out any single early voyage moves the drop; it stays above 55%</div></div>
+    <div class="stat"><div class="big">0.35%</div><div class="lbl"><span class="src mixed">their data, our analysis</span>share of our resamples in which the drop vanishes (zero or below)</div></div>
   </div>
-  <p>In the full data, the drop survives all of it.</p>
 </div></section>
 
 <section><div class="wrap">
   <h2><span class="num">03</span>Where the early evidence lives</h2>
-  <p>The decline is carried by the first three years after onset (T = 0 to 2). Those years hold 190 sighting-days from 18 voyages.</p>
+  <p>The decline is carried by the first three years after onset (T = 0 to 2). In the authors' data those years hold 190 sighting-days from 18 voyages. When we sorted them, they clustered.</p>
+  <div class="grid3">
+    <div class="stat"><div class="big">138 of 190</div><div class="lbl"><span class="src mixed">their data, our analysis</span>early sighting-days in regions first logged in 1822, which also hold 1,837 of all 2,321 fitted days</div></div>
+    <div class="stat"><div class="big">1,762</div><div class="lbl"><span class="src mixed">their data, our analysis</span>of those 1,837 days lie on the grounds the authors labelled Japan, Japan-East, Japan-North and Coast of Japan</div></div>
+    <div class="stat"><div class="big">148 of 190</div><div class="lbl"><span class="src mixed">their data, our analysis</span>early days from four voyages that sailed in 1821; the other 14 voyages supply 42</div></div>
+  </div>
   <figure class="fig">
     <img src="/logbook/img/sperm-whales-and-whalers/fig2-early-evidence-sources.png" loading="lazy" alt="Two-panel chart. Left: early sighting-days by the year a region was first sighted; regions first sighted in 1822 hold 138 of 190 early days and 1,837 of 2,321 fitted days, and no other group holds more than 18 early days. Right: a grid of 190 squares, one per early sighting-day, coloured by voyage; four voyages fill 148 squares (64, 33, 26 and 25) and 14 other voyages fill the remaining 42.">
-    <figcaption>Left: sighting-days in a region's first three years, by the year the region was first sighted in the data (all fitted days in brackets). Right: the same 190 days, one square each, coloured by voyage (AOWV voyage IDs). Recomputed from the 2021 supplement.</figcaption>
+    <figcaption>Our figure, from the authors' published data. Left: sighting-days in a region's first three years, by the year the region was first sighted in the data (all fitted days in brackets). Right: the same 190 days, one square each, coloured by voyage (AOWV voyage IDs).</figcaption>
   </figure>
-  <p>Regions first sighted in the data in 1822 hold 138 of the 190 early days and 1,837 of the 2,321 days in the whole fit. Nearly all of those days (1,762) lie on the grounds the authors labelled Japan, Japan-East, Japan-North and Coast of Japan, after the whalers' own names. No other onset year holds more than 11 early days. Four voyages, all of which sailed in 1821, supply 148 of the 190; the other 14 supply 42.</p>
-  <p>On that ground the story is vivid: in its first three years whalers struck about 0.99 whales per day of sightings, and later 0.41. That is the famous drop at its clearest, and it is one regional event: the first logged years of the Japan grounds, seen mostly through four voyages' logs.</p>
+  <p>No other onset year holds more than 11 early days. On the 1822 ground we count about 0.99 whales struck per day of sightings in the first three years, and 0.41 later. That is the famous drop at its clearest, and it is one regional event: the first logged years of the Japan grounds, seen mostly through four voyages' logs.</p>
 </div></section>
 
 <section><div class="wrap">
   <h2><span class="num">04</span>Take that ground away</h2>
-  <p>The paper's title asks about learning on a large scale. So the natural test is to set the 1822 regions aside and see whether the rest of the North Pacific tells the same story. We wrote the rule down before running it.</p>
-  <div class="rule"><p style="margin:0"><strong>The rule, fixed in advance.</strong> ROBUST only if the full-data voyage interval excludes zero and, without the 1822 regions, the drop is at least 29% (half the published 58%) and its voyage interval also excludes zero. FRAGILE if either interval includes zero.</p></div>
+  <p>The paper's title asks about learning on a large scale, so we set the 1822 regions aside to see whether the rest of the North Pacific tells the same story, under a rule written down in advance.</p>
+  <div class="rule"><p style="margin:0"><strong>Our rule, fixed in advance.</strong> ROBUST only if the full-data voyage interval excludes zero and, without the 1822 regions, the drop is at least 29% (half the published 58%) and its voyage interval also excludes zero. FRAGILE if either interval includes zero.</p></div>
   <figure class="fig">
     <img src="/logbook/img/sperm-whales-and-whalers/fig1-strike-rate-by-lag.png" loading="lazy" alt="Scatter chart of whales struck per sighting-day against years since the first sighting in a region, from 0 to 25. Teal dots for all regions and a solid teal curve falling from about 1.04 to a plateau near 0.44; pink rings for the data without the 1822-onset regions and a dashed pink curve falling from about 1.01 to about 0.56. The first three years are shaded.">
-    <figcaption>Whales struck per day of sightings against years since a region's first sighting. Teal: all 2,321 sighting-days, with the paper's model refitted (drop 58.2%, 2.45 years). Pink: the 484 days outside the 1822-onset regions, same model (drop 44.5%). Dot area shows sighting-days per year.</figcaption>
+    <figcaption>Our figure, from the authors' published data: whales struck per day of sightings against years since a region's first sighting. Teal: all 2,321 sighting-days, with our refit of the paper's model (drop 58.2%, 2.45 years). Pink: the 484 days outside the 1822-onset regions, same model (drop 44.5%).</figcaption>
   </figure>
-  <p>What is left is 484 sighting-days from 88 voyages, 52 of them early. The plainest measure is a before-and-after comparison with no curve: whalers struck 0.88 whales per sighting-day in a region's first three years and 0.61 afterwards, a 31% drop (the same comparison on all the data gives 53%). Its 95% voyage interval runs from -37% to 56%, so it includes zero. The paper's fitted curve gives 44.5%, above the 29% bar, but with so few early days it often cannot settle, and its interval runs from -52% to over 1,000%. Both intervals include zero.</p>
+  <p>What is left is 484 sighting-days from 88 voyages, 52 of them early. Our plainest measure, a before-and-after comparison with no curve, gives a 31% drop (0.88 whales struck per sighting-day in the first three years, 0.61 afterwards; 53% on all the data), with a 95% voyage interval of -37% to 56%. Refitting the paper's curve gives 44.5%, above the 29% bar, but with so few early days the curve often cannot settle, and its interval runs from -52% to over 1,000%. Both intervals include zero.</p>
   <figure class="fig">
     <img src="/logbook/img/sperm-whales-and-whalers/fig3-voyage-bootstrap.png" loading="lazy" alt="Histogram of 10,000 voyage-bootstrap estimates of the before-and-after drop in strike rate. The teal distribution for all regions is centred near 53%, with a 95% interval from 33.0% to 64.1%. The pink outline for the data without the 1822-onset regions is wider and centred near 31%, with a 95% interval from -36.7% to 56.1% that crosses zero.">
-    <figcaption>The plain before-and-after drop (strike rate in a region's first three years against later years) across 10,000 voyage resamples. Teal: all regions (111 voyages), 53.0%, 95% interval 33.0% to 64.1%. Pink: without the 1822-onset regions (88 voyages), 30.7%, interval -36.7% to 56.1%.</figcaption>
+    <figcaption>Our figure, from the authors' published data: the before-and-after drop across our 10,000 voyage resamples. Teal: all regions (111 voyages), 53.0%, 95% interval 33.0% to 64.1%. Pink: without the 1822-onset regions (88 voyages), 30.7%, interval -36.7% to 56.1%.</figcaption>
   </figure>
-  <p>Under our rule, that is FRAGILE: outside the 1822 regions, the data are too thin to confirm the drop or to rule it out. The drop is clear where the logs first record whaling in 1822 and points the same way elsewhere, so the large-scale reading rests mostly on one region. Whether the whales learned remains open.</p>
+  <p>Under our rule, that is FRAGILE: outside the 1822 regions, the data are too thin to confirm the drop or to rule it out, so the large-scale reading rests mostly on one region. Whether the whales learned remains open.</p>
   <p class="pull">The famous drop is real in these logs. Most of its early evidence was written down by four voyages on one ground.</p>
 </div></section>
 
 <section><div class="wrap">
   <h2><span class="num">05</span>Could fresh logbooks settle it?</h2>
-  <p>The clean test of a pattern uses data its authors never saw. The Providence Public Library's Nicholson Whaling Collection has 751 digitised items on the Internet Archive, free to reuse. We matched each one against the American Offshore Whaling Logbook database (AOWL), which the 2021 study drew on: 159 are in it, 502 are not, and 90 are partial or uncertain matches. We sealed all 592 as future test data and opened none of their pages.</p>
-  <p>We tested an AI reader on four logbooks already in AOWL, from voyages of 1831 to 1841. It agreed with AOWL's abstracts on 86 of 97 days (88.7%) and caught 9 of 10 strike days, but flagged only 13 of the 20 encounter days. Our go-line was 90%, so the reader needs one more pass. (AOWL: New Bedford Whaling Museum, Nantucket Historical Association and Mystic Seaport Museum, CC BY 4.0.)</p>
-  <p>The harder problem is timing. Projected from the sealed logbooks' dates and destinations, they would add about 61 sighting-days from a region's first three years, 41.9 of them from two voyages that sailed in 1822. The bar we set in advance was 150.</p>
+  <p>The clean test of a pattern uses data its authors never saw. The Providence Public Library's Nicholson Whaling Collection has 751 digitised items on the Internet Archive, free to reuse. We matched each one against AOWL, sealed the unmatched and uncertain ones as future test data, and opened none of their pages.</p>
+  <div class="grid3">
+    <div class="stat"><div class="big">502 of 751</div><div class="lbl"><span class="src ours">our analysis</span>Providence items outside AOWL (90 more partial or uncertain); we sealed all 592 unread</div></div>
+    <div class="stat"><div class="big">88.7%</div><div class="lbl"><span class="src ours">our analysis</span>our AI reader's agreement with AOWL's abstracts, 86 of 97 days, against a 90% go-line</div></div>
+    <div class="stat"><div class="big">about 61</div><div class="lbl"><span class="src ours">our analysis</span>early sighting-days we project for the sealed logbooks, against 150 needed</div></div>
+  </div>
+  <p>Our reader test used four logbooks already in AOWL, from voyages of 1831 to 1841. It caught 9 of 10 strike days but flagged only 13 of the 20 encounter days, so it needs one more pass. (AOWL: New Bedford Whaling Museum, Nantucket Historical Association and Mystic Seaport Museum, CC BY 4.0.) The harder problem is timing: 41.9 of the projected 61 early days come from just two voyages that sailed in 1822.</p>
   <figure class="fig">
     <img src="/logbook/img/sperm-whales-and-whalers/fig4-heldout-power-gap.png" loading="lazy" alt="Two-panel chart. Left: stacked bars of 602 dated held-out voyages by decade of departure, split into Pacific, Atlantic or Indian, and unknown; the 1850s peak at 162 while the 1820s hold 18. Right: horizontal bars of early sighting-days; the 2021 study has 190, the held-out Nicholson logbooks are projected to add 60.7 (41.9 of them from two voyages that sailed in 1822), and a vertical line marks the 150 needed.">
-    <figcaption>Left: the sealed Nicholson voyages with daily logs, by decade of departure and ocean (602 dated, one undated). Right: sighting-days in a region's first three years, in the 2021 data and projected for the sealed logbooks, against the 150 a decisive test needs. The projection uses voyage dates and destinations only.</figcaption>
+    <figcaption>Our analysis, from the AOWV voyage records and the Nicholson catalogue. Left: sealed Nicholson voyages with daily logs, by decade and ocean (602 dated, one undated). Right: early sighting-days in the 2021 data and projected for the sealed logbooks from voyage dates and destinations only, against the 150 a decisive test needs.</figcaption>
   </figure>
-  <p>The early logs do exist. The voyage database lists 63 voyages that left for the Pacific (or for no recorded ground) in 1819-1824 and have a surviving logbook outside AOWL. Its repository entries put most of them at the New Bedford Whaling Museum (30 entries, including its Kendall collection) and the Nantucket Historical Association (12); a voyage can have logs in more than one place, so these counts may overlap. We could find only 2 of the 63 on whalinghistory.org's list of scanned logs, the two Nicholson voyages above, and we did not check the museums' own catalogues.</p>
+  <p>The early logs do exist: the voyage database lists 63 voyages that left for the Pacific (or no recorded ground) in 1819-1824 with a surviving logbook outside AOWL, most with entries at the New Bedford Whaling Museum (30, including its Kendall collection) and the Nantucket Historical Association (12), counts that may overlap. We found only 2 of the 63 on whalinghistory.org's list of scanned logs, and we did not check the museums' own catalogues.</p>
 </div></section>
 
 <section><div class="wrap">
@@ -201,11 +228,11 @@
   <p>Our own weak points, in brief.</p>
   <div class="honest">
     <ul>
-      <li style="margin-top:0"><strong>The verdict turns on the unit.</strong> Resample the file's voyage-year segments as if independent, and the interval without 1822 becomes 19.2% to 998%, which excludes zero and would read ROBUST. We fixed whole voyages as the unit in advance, because one crew and one captain carry from year to year. A careful analyst could weigh that differently, and we would like to hear the case.</li>
-      <li><strong>The 1822 cut was chosen with eyes open.</strong> Our earlier check is what showed how concentrated the early years are. The rule was written before this analysis, but the cut was informed by the data. A fully blind test needs new logbooks.</li>
-      <li><strong>The onset year is the first logged year.</strong> Onsets come from the first sighting in a database that holds about one voyage in ten, so "1822" marks when whaling first shows up in these logs; hunting in a region may have begun earlier. We held onsets at their full-data dates, as the paper's curve does.</li>
+      <li style="margin-top:0"><strong>The verdict turns on the unit.</strong> Resample the file's voyage-year segments as if independent, and the interval without 1822 becomes 19.2% to 998%, which excludes zero and would read ROBUST. We fixed whole voyages as the unit in advance, because one crew and one captain carry from year to year. A careful analyst could weigh that differently.</li>
+      <li><strong>The 1822 cut was chosen with eyes open.</strong> Our earlier check showed how concentrated the early years are. The rule was written before this analysis, but the cut was informed by the data.</li>
+      <li><strong>The onset year is the first logged year.</strong> Onsets come from the first sighting in records that cover about one voyage in ten, so "1822" marks when whaling first shows up in these logs; hunting may have begun earlier.</li>
       <li><strong>A pattern is one question, its cause another.</strong> Whaler skill, the most vulnerable whales dying first, and changes in what log-keepers chose to record can all bend the same curve. The authors modelled several of these; we tested none.</li>
-      <li><strong>Our reader is short of its own bar.</strong> It scored 88.7% against a 90% go-line, and its misses cluster on sighting-only days, the denominator of the strike rate.</li>
+      <li><strong>Our reader is short of its own bar</strong>, and its misses cluster on sighting-only days, the denominator of the strike rate.</li>
       <li><strong>Novelty, bounded.</strong> OpenAlex lists 56 works citing the paper (checked 13 November 2026). None of their titles, and none of the 51 abstracts available (91%), describes a re-analysis of the drop. We have not read their full texts, so someone may already have made this point.</li>
     </ul>
   </div>
@@ -213,10 +240,9 @@
 
 <section><div class="wrap">
   <h2><span class="num">07</span>What it means, and the size of it</h2>
-  <p>The 2021 result stands where the data are dense: the first logged years of the Japan grounds, as recorded by a handful of voyages in 1822 and 1823. There the drop is large, stable under every voyage-level shake we tried, and clearly recorded. The broader reading in the paper's title, learning on a large scale, rests mostly on that one ground. Elsewhere the logs lean the same way and hold too few early days to say more.</p>
-  <p>That is a data problem with a data answer: read the early logs. Many of the 63 early voyages we could not find scanned have logbooks recorded at New Bedford and Nantucket. With those logs, the sealed Nicholson books and a reader that clears its bar, we could give the question a fair, pre-registered test, ideally one the original authors help design.</p>
+  <p>In our analysis, the 2021 result stands where the data are dense: the first logged years of the Japan grounds, as recorded by a handful of voyages in 1822 and 1823. The broader reading in the paper's title, learning on a large scale, rests mostly on that one ground. Elsewhere the logs lean the same way and hold too few early days to say more.</p>
+  <p>That is a data problem with a data answer: read the early logs. With the early New Bedford and Nantucket logs, the sealed Nicholson books and a reader that clears its bar, we could give the question a fair, pre-registered test, ideally one the original authors help design.</p>
   <p>To Hal Whitehead, Tim Smith and Luke Rendell: thank you for publishing the files that made this possible. We would value your view on three things: whether the voyage is the right unit for resampling, whether a leave-one-ground-out check changes how you read the large-scale question, and which early logbooks you know of. If we have something wrong, we will correct it here.</p>
-  <p class="pull">An open dataset, a famous curve and a sealed shelf of logbooks. The next step is reading the right ones.</p>
   <p>Don't panic. Bring a held-out set.</p>
   <p style="margin-top:1.6rem"><a href="/logbook/the-keepers-thermometer.html">The previous dispatch: the keeper's thermometer &#8594;</a></p>
 </div></section>
